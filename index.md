@@ -37,12 +37,9 @@ Syntax highlighted code block
 
 **Bold** and _Italic_ and `Code` text -->
 
+This is a test on linking a pdf file. 
+[David's paper](https://cwlin4916.github.io/cwlin4916/Mathematical Papers/A/ABG10-twists-k-theory.pdf)
 
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
 
 <!-- 
 ### Jekyll Themes
