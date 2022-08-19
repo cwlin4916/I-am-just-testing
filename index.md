@@ -1,7 +1,6 @@
 
 
 Ok, this is just testing. 
-Some questions to resolve. How do I comment out sections? 
 
 
 On Langlands, morally. 
