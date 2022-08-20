@@ -1,14 +1,6 @@
+This is just a testing sitem where I document some daily thoughts. 
 
-
-Ok, this is just testing. 
-
-
-On Langlands, morally. 
-
-Below are notes I have written in my attempt to understand Langlands. Style maybe shit. 
-
-
-- Historial review the "classical Langlands". 
+[On Langlands]([url](https://github.com/cwlin4916/I-am-just-testing/blob/d3457cb13aef8faed8cddcbc1f0c6d15c8014960/Langlands.md))
 
 
 
