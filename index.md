@@ -1,40 +1,7 @@
 This is just a testing sitem where I document some daily thoughts. 
-
-[On Langlands]([url](https://github.com/cwlin4916/I-am-just-testing/blob/d3457cb13aef8faed8cddcbc1f0c6d15c8014960/Langlands.md))
-
-
+[On Langlands]([url](https://github.com/cwlin4916/I-am-just-testing/blob/c547b8c1dbb6152949f85b3245b6aee5a0a2d26e/Langlands.md))
 
 <!-- 
 You can use the [editor on GitHub](https://github.com/cwlin4916/cwlin4916/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files. -->
-<!-- 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
-
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text -->
-
 This is a test on linking a pdf file. 
 [David's paper](https://cwlin4916.github.io/cwlin4916/Mathematical Papers/A/ABG10-twists-k-theory.pdf)
-
-
-<!-- 
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/cwlin4916/cwlin4916/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
- -->
