@@ -9,6 +9,24 @@
 
 <style>
 
+/* Apparent this cannot be applied to body  */
+.fade-out {
+			opacity: 0;
+			transition: opacity 5	s ease-in-out;
+		}
+
+		body {
+  animation: fadeOut 18s ease forwards;
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+} 
 .center {
   display: block;
   margin-left: auto;
@@ -29,7 +47,7 @@ a:visited {
 </style>
 
 <h4 id="top"> Hello world!  </h4>
-<body> 
+<body class="fade-out"> 
 	<p  
 	style="font-size: 13.5px;" 
 	>
