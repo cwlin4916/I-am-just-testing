@@ -4,49 +4,62 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title> Hello  world! </title>
-	<link rel="stylesheet" type="text/css" href="test/trees_style.css">
-</head>
+	
 
 <style>
+	a:visited {
+		color: inherit;
+	}
+	</style>
 
-/* Apparent this cannot be applied to body  */
-.fade-out {
-			opacity: 0;
-			transition: opacity 5	s ease-in-out;
-		}
+<style>
+	body {
+animation: fadeOut 25s ease forwards; 
 
-		body {
-  animation: fadeOut 18s ease forwards;
+background-image: url("../Trees/photos/drawing/IMG_3404.jpg");
+			background-size: cover;
+			background-position: center right;
+}
+
+/* so the opacity of my background should be 1 */
+body::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 1); /* Change the opacity by modifying the last value */
+  z-index: -1;
 }
 
 @keyframes fadeOut {
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0;
-  }
+from {
+opacity: 1;
+}
+to {
+opacity: 0;
+}
 } 
 .center {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
+display: block;
+margin-left: auto;
+margin-right: auto;
 }
 /* 
 img {
-	width: 250px;
-	height: 350px;
+width: 250px;
+height: 350px;
 } */
 
 /*color returns*/
 
-a:visited {
-    color: inherit;
-}
-
 </style>
+</head>
 
 <h4 id="top"> Hello world!  </h4>
+
 <body class="fade-out"> 
 	<p  
 	style="font-size: 13.5px;" 
@@ -60,14 +73,15 @@ I am in my 4th year of Ph.D at Johns Hopkins. <br>
 	<!-- <img src="../Trees/photos/drawing/Screen Shot 2023-02-06 at 2.11.56 PM.png", height="300px", width="400px", class="center"> -->
 	<!-- <img src="../Trees/photos/drawing/IMG_9645.jpg", height="400px", width="300px", class="center"> -->
 
-	<img id="myImage" src="../Trees/photos/drawing/IMG_9646.jpg", height="400px", width="300px" >
-
-
+	<img id="myImage" src="../Trees/photos/drawing/valentine1.jpg", width="300px", height="400px">
 	<script>
 		var images = [
-		  {src: "../Trees/photos/drawing/IMG_9646.jpg"  , width: 300, height: 400},
+		{src: "../Trees/photos/drawing/valentine1.jpg", width: 300, height: 400},
+		//   {src: "../Trees/photos/drawing/Ox1.jpg", width: 300, height: 400},
 		  {src: "../Trees/photos/drawing/IMG_9645.jpg", width: 300, height: 400},
-		  {src: "../Trees/photos/drawing/Screen Shot 2023-02-06 at 2.11.56 PM.png", width: 400, height: 300}
+		  
+		//   {src: "../Trees/photos/drawing/IMG_3403.jpg", width: 300, height: 400},
+		//   {src: "../Trees/photos/drawing/Screen Shot 2023-02-06 at 2.11.56 PM.png", width: 400, height: 300}
 		];
 
 		var currentIndex = 0;
@@ -84,7 +98,7 @@ I am in my 4th year of Ph.D at Johns Hopkins. <br>
 		  img.height = images[currentIndex].height;
 		}
 	  
-		setInterval(changeImage, 10*500);
+		setInterval(changeImage, 10*600);
 	  </script>
 
 	<br>
