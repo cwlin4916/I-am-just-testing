@@ -14,11 +14,11 @@
 
 <style>
 	body {
-animation: fadeOut 25s ease forwards; 
+ animation: fadeOut 25s ease forwards;  
 
 background-image: url("../Trees/photos/drawing/IMG_3404.jpg");
 			background-size: cover;
-			background-position: center right;
+			background-position: center;
 }
 
 /* so the opacity of my background should be 1 */
@@ -42,25 +42,21 @@ to {
 opacity: 0;
 }
 } 
+
+
 .center {
 display: block;
 margin-left: auto;
 margin-right: auto;
-}
-/* 
-img {
-width: 250px;
-height: 350px;
-} */
-
-/*color returns*/
+}  
 
 </style>
 </head>
 
+<body>
+
 <h4 id="top"> Hello world!  </h4>
 
-<body class="fade-out"> 
 	<p  
 	style="font-size: 13.5px;" 
 	>
@@ -71,14 +67,17 @@ I am in my 4th year of Ph.D at Johns Hopkins. <br>
 
 	<!-- <img src="photos/pidan/room.jpg" class="center" > -->
 	<!-- <img src="../Trees/photos/drawing/Screen Shot 2023-02-06 at 2.11.56 PM.png", height="300px", width="400px", class="center"> -->
-	<!-- <img src="../Trees/photos/drawing/IMG_9645.jpg", height="400px", width="300px", class="center"> -->
+	
+ <img id="myImage" src="../Trees/photos/drawing/IMG_9645.jpg", height="400px", width="300px", class="center"> 
 
-	<img id="myImage" src="../Trees/photos/drawing/valentine1.jpg", width="300px", height="400px">
+ <!-- <img id="myImage" src="../Trees/photos/drawing/valentine1.jpg", width="300px", height="400px"> -->
 	<script>
 		var images = [
-		{src: "../Trees/photos/drawing/valentine1.jpg", width: 300, height: 400},
+		// {src: "../Trees/photos/drawing/IMG_9645.jpg", width: 300, height: 400},
+		
+		// {src: "../Trees/photos/drawing/valentine1.jpg", width: 300, height: 400},
 		//   {src: "../Trees/photos/drawing/Ox1.jpg", width: 300, height: 400},
-		  {src: "../Trees/photos/drawing/IMG_9645.jpg", width: 300, height: 400},
+		  
 		  
 		//   {src: "../Trees/photos/drawing/IMG_3403.jpg", width: 300, height: 400},
 		//   {src: "../Trees/photos/drawing/Screen Shot 2023-02-06 at 2.11.56 PM.png", width: 400, height: 300}
