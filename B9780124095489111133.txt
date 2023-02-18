@@ -1,0 +1,12 @@
+Jitka Polechová, David Storch,
+Ecological Niche☆,
+Editor(s): Brian Fath,
+Encyclopedia of Ecology (Second Edition),
+Elsevier,
+2019,
+Pages 72-80,
+ISBN 9780444641304,
+https://doi.org/10.1016/B978-0-12-409548-9.11113-3.
+(https://www.sciencedirect.com/science/article/pii/B9780124095489111133)
+Abstract: An ecological niche characterizes the position of a species within an ecosystem, comprising both the habitat requirements and the functional role of a species. Despite undergoing several substantial transformations, this century-old concept still represents a major heuristic tool for our understanding of nature. The niches of distinct, even closely related, species tend to differ in at least some aspects, as interspecific competition minimizes their overlap. In general, interspecific differences in abundance and distribution can be explained by different niche width and position. However, due to spatiotemporal population dynamics, partitioning of the niche space is never perfect, and in some part of their habitat, species will coexist in the absence of a substantial niche separation. Species’ evolution always implies the evolution of species’ niche. To some extent, we can predict niche evolution based on knowledge of the environment and of the trade-offs that affect the potential resource utilization of individual species. In the course of evolution, species have a tendency to narrow their niches due to interspecific competition and intraspecific optimization. Consequently, niche widening often occurs when a species is released from interspecific competition. Furthermore, species do not passively adapt to their niches but rather actively modify them. This feedback leads to the coevolution of species with their environments and to the evolution of whole ecological communities.
+Keywords: Coexistence; Competitive exclusion; Ecological release; Functional niche; Fundamental niche; Limiting similarity; Niche shift; Niche width; Realized niche; Species abundance; Species packing; Taxon cycle; Trophic niche
