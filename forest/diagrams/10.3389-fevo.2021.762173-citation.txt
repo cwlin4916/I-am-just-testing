@@ -1,0 +1,17 @@
+AUTHOR=Sun Jianqiang, Futahashi Ryo, Yamanaka Takehiko
+	 
+TITLE=Improving the Accuracy of Species Identification by Combining Deep Learning With Field Occurrence Records  
+	
+JOURNAL=Frontiers in Ecology and Evolution     
+	
+VOLUME=9      
+	
+YEAR=2021   
+		
+URL=https://www.frontiersin.org/articles/10.3389/fevo.2021.762173     
+	  
+DOI=10.3389/fevo.2021.762173    
+	
+ISSN=2296-701X   
+
+ABSTRACT=Citizen science is essential for nationwide ecological surveys of species distribution. While the accuracy of the information collected by beginner participants is not guaranteed, it is important to develop an automated system to assist species identification. Deep learning techniques for image recognition have been successfully applied in many fields and may contribute to species identification. However, deep learning techniques have not been utilized in ecological surveys of citizen science, because they require the collection of a large number of images, which is time-consuming and labor-intensive. To counter these issues, we propose a simple and effective strategy to construct species identification systems using fewer images. As an example, we collected 4,571 images of 204 species of Japanese dragonflies and damselflies from open-access websites (i.e., web scraping) and scanned 4,005 images from books and specimens for species identification. In addition, we obtained field occurrence records (i.e., range of distribution) of all species of dragonflies and damselflies from the National Biodiversity Center, Japan. Using the images and records, we developed a species identification system for Japanese dragonflies and damselflies. We validated that the accuracy of the species identification system was improved by combining web-scraped and scanned images; the top-1 accuracy of the system was 0.324 when trained using only web-scraped images, whereas it improved to 0.546 when trained using both web-scraped and scanned images. In addition, the combination of images and field occurrence records further improved the top-1 accuracy to 0.668. The values of top-3 accuracy under the three conditions were 0.565, 0.768, and 0.873, respectively. Thus, combining images with field occurrence records markedly improved the accuracy of the species identification system. The strategy of species identification proposed in this study can be applied to any group of organisms. Furthermore, it has the potential to strike a balance between continuously recruiting beginner participants and updating the data accuracy of citizen science.
