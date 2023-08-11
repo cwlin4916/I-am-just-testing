@@ -1,0 +1,41 @@
+p {
+    font-size: 13.5px;
+}
+
+body {
+    margin: 20px 40px;
+}
+
+a:visited {
+    color: inherit;
+}
+li {
+     font-size: 13.5px;
+}
+.home-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #dce7e7;  /* Dark gray background */
+    color: #fff;  /* White text */
+    text-decoration: none;  /* Remove underline from link */
+    border-radius: 5px;  /* Rounded corners */
+    margin-top: 20px;  /* Space at the top */
+    text-align: center;
+}
+
+.home-button:hover {
+    background-color: #e1eded;  /* Slightly lighter gray for hover effect */
+}
+
+
+.home-button {
+    font-size: 12px;           /* Adjusts the size of the icon */
+    color: #a6caca;               /* Color of the icon */
+    text-decoration: none;    /* Removes underline */
+    padding: 2px;             /* Adds space around the icon */
+}
+
+.home-button:hover {
+    color: #ecdddd;               /* Changes color when hovering */
+}
+
