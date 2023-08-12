@@ -133,7 +133,7 @@ li {
     display: inline-block;
     padding: 10px 20px;
     background-color: #dce7e7;  /* Dark gray background */
-    color: #000000;  /* White text */
+    color: #043835;  /* White text */
     text-decoration: none;  /* Remove underline from link */
     border-radius: 5px;  /* Rounded corners */
     margin-top: 20px;  /* Space at the top */
@@ -146,12 +146,39 @@ li {
 
 
 .seminar-button {
-    font-size: 12px;           /* Adjusts the size of the icon */
-    color: #0f1414;               /* Color of the icon */
+    font-size: 10px;               /* Color of the icon */
     text-decoration: none;    /* Removes underline */
     padding: 2px;             /* Adds space around the icon */
 }
 
 .seminar-button:hover {
+    color: #ecdddd;               /* Changes color when hovering */
+}
+
+
+
+.food-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #dce7e7;  /* Dark gray background */
+    color: #043835;  /* White text */
+    text-decoration: none;  /* Remove underline from link */
+    border-radius: 5px;  /* Rounded corners */
+    margin-top: 20px;  /* Space at the top */
+    text-align: center;
+}
+
+.food-button:hover {
+    background-color: #e1eded;  /* Slightly lighter gray for hover effect */
+}
+
+
+.food-button {
+    font-size: 10px;               /* Color of the icon */
+    text-decoration: none;    /* Removes underline */
+    padding: 2px;             /* Adds space around the icon */
+}
+
+.food-button:hover {
     color: #ecdddd;               /* Changes color when hovering */
 }
