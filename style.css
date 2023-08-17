@@ -182,3 +182,31 @@ li {
 .food-button:hover {
     color: #ecdddd;               /* Changes color when hovering */
 }
+
+
+
+.user-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #dce7e7;  /* Dark gray background */
+    color: #043835;  /* White text */
+    text-decoration: none;  /* Remove underline from link */
+    border-radius: 5px;  /* Rounded corners */
+    margin-top: 20px;  /* Space at the top */
+    text-align: center;
+}
+
+.user-button:hover {
+    background-color: #e1eded;  /* Slightly lighter gray for hover effect */
+}
+
+
+.user-button {
+    font-size: 10px;               /* Color of the icon */
+    text-decoration: none;    /* Removes underline */
+    padding: 2px;             /* Adds space around the icon */
+}
+
+.user-button:hover {
+    color: #ecdddd;               /* Changes color when hovering */
+}
