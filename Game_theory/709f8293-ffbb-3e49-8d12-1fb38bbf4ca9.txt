@@ -1,0 +1,14 @@
+@article{709f8293-ffbb-3e49-8d12-1fb38bbf4ca9,
+ ISSN = {00485829, 15737101},
+ URL = {http://www.jstor.org/stable/30023422},
+ author = {Shmuel Nitzan and Ariel Rubinstein},
+ journal = {Public Choice},
+ number = {1},
+ pages = {153--158},
+ publisher = {Springer},
+ title = {A Further Characterization of Borda Ranking Method},
+ urldate = {2023-10-06},
+ volume = {36},
+ year = {1981}
+}
+
