@@ -238,3 +238,10 @@ li {
 .user-button:hover {
     color: #ecdddd;               /* Changes color when hovering */
 }
+
+
+video {
+    width: 500px; /* You can set this to your desired width */
+    height: 300px; /* You can set this to your desired height */
+}
+
