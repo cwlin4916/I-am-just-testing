@@ -1,8 +1,8 @@
 ### Hi there 👋
 
-This repository contains 
-- Collection of scientific articles I downloaded. Mostly mathematics. 
-- My webpage. 
+Items are within gh-page branch. Contains 
+- collection of scientific articles I downloaded. Mostly mathematics. 
+- my webpage. 
 
 
 <!--
