@@ -1,8 +1,8 @@
 ### Hi there 👋
 
 Items are within gh-page branch. Contains 
-- collection of scientific articles I downloaded. Mostly mathematics. 
-- my webpage. 
+- Collection of scientific articles I downloaded. Mostly mathematics. 
+- My webpage. 
 
 
 <!--
