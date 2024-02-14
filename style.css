@@ -4,6 +4,8 @@ p {
 
 body {
     margin: 20px 40px;
+    max-width: 480px;
+    padding: 20px;
 }
 
 a:visited {
