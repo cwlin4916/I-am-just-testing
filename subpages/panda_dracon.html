@@ -6,32 +6,29 @@
     <title>Panda і Дракон</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            color: #0033cc; /* Light blue color for text */
+            font-family: 'Courier New', cursive; /* Relaxed, handwritten-like font */
+            background-color: rgba(173, 216, 230, 0.2); /* Extremely light, transparent blue */
             margin: 0;
             padding: 0;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             height: 100vh;
             text-align: center;
-            background-color: #f0f0f0; /* Light background to complement the photo */
         }
 
-        .container {
-            background-color: rgba(255, 255, 255, 0.9); /* Slightly less transparent overlay for readability */
-            padding: 20px;
-            border-radius: 10px;
-            max-width: 500px;
-            margin: auto;
+        img {
+            display: block;
+            max-width: 25%; /* Reduced to a quarter of its size */
+            height: auto;
+            border-radius: 15px; /* Rounded corners for a softer look */
+            margin-bottom: 20px; /* Space between the image and the text */
+            opacity: 0.4; /* 80% opacity for smoother blending */
         }
 
         h1 {
-            font-size: 1.25em; /* Reduced size */
-            margin-bottom: 10px;
-        }
-
-        h1 .panda {
+            font-size: 1.5em;
             color: #0057b7; /* Blue color for "Panda" */
         }
 
@@ -40,24 +37,15 @@
         }
 
         p {
-            font-size: 0.6em; /* Reduced size */
-            color: #000; /* Normal black color for paragraph text */
-        }
-
-        img {
-            display: block;
-            margin: 20px auto;
-            max-width: 100%;
-            height: auto;
-            border-radius: 10px; /* Add rounded corners to the image */
+            font-size: 1em;
+            color: #000; /* Black for normal text */
+            font-family: 'Courier New', cursive; /* Consistent relaxed font */
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <img src="/Users/miltonlin/Documents/GitHub/Trees/photos/Anna/panda_dracon1.jpg" alt="Panda and Dragon">
-        <h1><span class="panda">Panda</span> і <span class="dracon">Дракон</span></h1>
-        <p>дні крихітної панди та крихітного дракона</p>
-    </div>
+    <img src="/Users/miltonlin/Documents/GitHub/Trees/photos/Anna/panda_dracon1.jpg" alt="Panda і Дракон">
+    <h1><span class="panda">Panda</span> і <span class="dracon">Дракон</span></h1>
+    <p>дні крихітної панди та крихітного дракона</p>
 </body>
 </html>
