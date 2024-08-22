@@ -7,10 +7,6 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-image: url("/Users/miltonlin/Documents/GitHub/Trees/photos/Anna/panda_dracon1.jpg");
-            background-size: 60%;
-            background-position: center;
-            background-repeat: no-repeat;
             color: #0033cc; /* Light blue color for text */
             margin: 0;
             padding: 0;
@@ -19,10 +15,11 @@
             justify-content: center;
             height: 100vh;
             text-align: center;
+            background-color: #f0f0f0; /* Light background to complement the photo */
         }
 
         .container {
-            background-color: rgba(255, 255, 255, 0.8); /* Light white overlay for readability */
+            background-color: rgba(255, 255, 255, 0.9); /* Slightly less transparent overlay for readability */
             padding: 20px;
             border-radius: 10px;
             max-width: 500px;
@@ -30,7 +27,7 @@
         }
 
         h1 {
-            font-size: 1.25em; /* Reduced size to half */
+            font-size: 1.25em; /* Reduced size */
             margin-bottom: 10px;
         }
 
@@ -43,15 +40,24 @@
         }
 
         p {
-            font-size: 0.6em; /* Reduced size to half */
+            font-size: 0.6em; /* Reduced size */
             color: #000; /* Normal black color for paragraph text */
+        }
+
+        img {
+            display: block;
+            margin: 20px auto;
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px; /* Add rounded corners to the image */
         }
     </style>
 </head>
 <body>
     <div class="container">
+        <img src="/Users/miltonlin/Documents/GitHub/Trees/photos/Anna/panda_dracon1.jpg" alt="Panda and Dragon">
         <h1><span class="panda">Panda</span> і <span class="dracon">Дракон</span></h1>
-        <p>Це пам'ять про маленьку панду і маленького, маленького дракона.</p>
+        <p>дні крихітної панди та крихітного дракона</p>
     </div>
 </body>
 </html>
