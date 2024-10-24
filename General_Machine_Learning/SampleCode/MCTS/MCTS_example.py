@@ -3,9 +3,8 @@ The following code is to run the MCTS algorithm.
 The MCTS process starts with a root node representing the current game state. 
 Then interatively: 
 1 Selection: A tree policy is used to select a leaf node. This is usually UCB1. 
-1a) We will repeat the selection process untiil we reach a node that does not have any children. This is also called a leaf node. 
 We then consider two cases on whether the visit count (n) of the leaf node is greater than 0. 
-1b) If we have previously vist the current leaf node. We run a simlutation, to step 2. 
+1a) If we have previously vist the current leaf node. We run a simlutation, to step 2. 
 1b) If we have not previously visited the current leaf node, n=0, we expand the current leaf node. 
 2. Simulates: A simulation is run from the leaf node to a terminal state. 
 3. Backpropagation: The result of the simulation is used to update the nodes on the path from the root to the leaf. 
@@ -17,7 +16,7 @@ import math
 import copy
 import random 
 import numpy as np
-import gynamsium as gym #This is the gym environment that we will be using 
+import gymnasium as gym #This is the gym environment that we will be using 
 
 
 """
@@ -32,10 +31,10 @@ class Node:
         state: the state represented by this node. 
         children: the children of this node.  
         """
-        self.value=0  
-        self.n = 0 
-        self.state=state
-        self.children = [] 
+        self.value=0   # total accumulated return of this node
+        self.n = 0 # visit count 
+        self.state=state # state represented by this node 
+        self.children = [] #list of child notes 
     #method to calculate the UCB1 score of a child
     def get_child_ucb1(self, child):
         if child.n ==0:
@@ -79,17 +78,38 @@ class MCTS:
         self.start_env =copy.deepcopy(self.env) #We create a copy of the environment.
         self.root_node= Node(start_state) #We create a node with the start state. 
     
+        for act in range(self.env.action_space.n): # we first expand the root node by recursively acting all possible action 
+            env_copy = copy.deepcopy(self.env) #We create a copy of the environment. 
+            new_state, _, _, _ = env_copy.step(act) # The other return values are - reward (received after taking action), done (a boolean whether episode has ended), info. step(action) is a method by the gym environment for on time step. 
+            new_node = Node(new_state) #We create a new node with the new state. 
+            self.root_node.children.append(new_node) #We append the new node to the children of the root node. 
+        
+    
     # run n_iter, number of iterations 
     def run(self, n_iter =200):
+        """
+        Run the MCTS algorithm for a specified number of iterations. 
+        Input: 
+        self: the MCTS object. 
+        n_iter: the number of iterations to run the MCTS algorithm. 
+        Output: the action probabilities. 
+        """
         for _ in range (n_iter):
-            value, node_path = self.traverse() #We traverse the tree. 
+            value, node_path = self.traverse() #We traverse the tree to find a leaf node
+            self.backpropagate(node_path, value) #We backpropagate the value of the leaf node. 
+            self.env = copy.deepcopy(self.start_env) #We reset the environment to the start environment. 
+        #caluclate thea ction probabilities based on teh accumulated vlaues 
+        val=[float("-inf")]*self.env.action_space.n #We initialize the value of the actions to negative infinity. 
+        for i, child in enumerate(self.root_node.children):
+            val[i]= (child.value/child.n) #We calculate the value of the action. 
+        return np.exp(val)/np.sum(np.exp(val)) #We return the action probabilities. 
     
     def traverse(self):
         """
-        
+        The traverse method. We start fron the root node and traverse the tree until we reach a leaf node. 
         """
-        cur_node=self.root_node
-        node_path=[cur_node]
+        cur_node=self.root_node # We set the current node to the root node. 
+        node_path=[cur_node] #We initialize the node path to the current node, we will add in the nodes as we traverse the tree. 
         while cur_node.childern: # While the current node has children, we continue traversing the tree.
             cur_node, idx = cur_node.get_max_ucb1_child() #We get the child with the max UCB1 score.
             self.env.step(idx) # We take the action that corresponds to the child with the max UCB1 score.
@@ -101,15 +121,32 @@ class MCTS:
                 new_node = Node(new_state)
                 cur_node.children.append(new_node) #We append the new node to the children of the current node.
             cur_node, idx = cur_node.get_max_ucb1_child() #We get the child with the max UCB1 score. 
-                
+            self.env.step(idx) # we take the action that corresponds to the child with the max UCB1 score, what does this do  
+            node_path.append(cur_node)
+        return self.rollout(), node_path 
+    
+    def rollout(self) -> float: 
+        tot_reward = 0 
+        while True: 
+            act = random.randrange(self.env.action_space.n) #We choose a random action. 
+            _, reward, done, _ = self.env.step(act) 
+            tot_reward += reward 
+            if done: 
+                break
+            return tot_reward
             
 """Sample run
 """
 if __name__ == '__main__':
-    env=gym.make('CartPole-v0') #We create an instance of the CartPole environment.
-    env.reset()
+    env=gym.make('CartPole-v1') #We create an instance of the CartPole environment.
+    env.reset() # We reset the environment. 
     done = False #We set done to False. 
     tot_reward  = 0 #We initialize the total reward to 0. 
     while not done: 
         mcts =MCTS(copy.deepcopy(env),reset=False) # We create an instance of the MCTS class. 
-        probs=mcts.run(20)
+        probs=mcts.run(20) # We run the MCTS algorithm for 20 iterations. 
+        action = random.choices(range(len(probs)), weights=probs, k=1)[0] #We choose an action based on the action probabilities. 
+        
+        _, reward, done, _, _= env.step(action) #We take the action. 
+        tot_reward += reward # We update the total reward. 
+        print(f"Action: {action}, Reward: {reward}, Total Reward: {tot_reward}", end='\r') #We print the action, reward, and total reward. 
