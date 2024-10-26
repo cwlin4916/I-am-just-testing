@@ -2,18 +2,20 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Application Tracker</title>
+    <title>Application List</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f1f5f9;
+            font-family: 'Noto Sans JP', sans-serif;
+            background-color: #f5f5f5;
             color: #333;
             margin: 0;
             padding: 20px;
+            line-height: 1.6;
         }
         h1, h2 {
             text-align: center;
-            color: #3b82f6;
+            color: #1e40af;
         }
         table {
             width: 90%;
@@ -24,9 +26,10 @@
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
         th, td {
-            padding: 12px;
+            padding: 10px;
             text-align: left;
             border-bottom: 1px solid #e5e7eb;
+            font-size: 0.85em;
         }
         th {
             background-color: #93c5fd;
@@ -42,23 +45,24 @@
         .section-title {
             color: #3b82f6;
             margin-top: 30px;
+            font-size: 1.2em;
         }
         .description {
             text-align: center;
             max-width: 80%;
             margin: 0 auto 20px;
-            font-size: 1.1em;
+            font-size: 0.9em;
             color: #4b5563;
         }
         .marked-row {
-            background-color: #dbeafe;
+            background-color: #e0f2fe;
         }
         .mark-button, .undo-button {
-            padding: 8px 12px;
+            padding: 6px 10px;
             border: none;
             cursor: pointer;
             border-radius: 4px;
-            font-size: 0.9em;
+            font-size: 0.85em;
         }
         .mark-button {
             background-color: #3b82f6;
@@ -73,18 +77,31 @@
             background-color: #a5b4fc;
             cursor: not-allowed;
         }
+        .additional-materials {
+            max-width: 90%;
+            margin: 20px auto;
+            font-size: 0.85em;
+            color: #333;
+        }
+        .additional-materials a {
+            color: #1e40af;
+            text-decoration: none;
+        }
+        .additional-materials a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
     <h1>Milton's Application Tracker</h1>
-    
-    <p class="description">This page helps keep track of applications and interview opportunities. Click "Mark as Sent" once a letter is sent to update the status.</p>
+	<p class="description">This page lists all expected emails for letter uploads: (1) those received immediately upon my submission, and (2) those pending under the condition of an interview. <br> 
+		The "Mark as Sent" button changes the row to a lighter color to indicate that you have sent the letter. This feature uses local storage, so even if you refresh the page, it will remember which letters were marked as sent.</p>
 
     <h2 class="section-title">Upcoming Applications (Due by November 15)</h2>
     <table id="upcoming-applications">
         <tr>
             <th>Fellowship Name</th>
-            <th>Deadline (ET) </th>
+            <th>Deadline</th>
             <th>Status</th>
         </tr>
         <tr id="row-1">
@@ -111,24 +128,23 @@
                 <button class="undo-button" onclick="undoSent(this, 'row-3')">Undo</button>
             </td>
         </tr>
-        <!-- <tr id="row-4">
+        <tr id="row-4">
             <td><a href="https://www.jobs.ac.uk/job/DKB712/chapman-fellowships-in-mathematics-pure-mathematics-section">Imperial Chapman Fellowship</a></td>
-            <td>November 14th</td>
+            <td>November 15th</td>
             <td>
                 <button class="mark-button" onclick="markAsSent(this, 'row-4')">Mark as Sent</button>
                 <button class="undo-button" onclick="undoSent(this, 'row-4')">Undo</button>
             </td>
-        </tr> -->
-        
-        <tr id="row-9">
-            <td><a href="#">Titchmarsh Research Fellow</a></td>
-            <td>November 22nd</td>
+        </tr>
+        <tr id="row-5">
+            <td><a href="https://www.ihes.fr/en/applications/post-docs/simons-foundation/">IHES post-doctoral offers</a></td>
+            <td>December 2nd</td>
             <td>
-                <button class="mark-button" onclick="markAsSent(this, 'row-9')">Mark as Sent</button>
-                <button class="undo-button" onclick="undoSent(this, 'row-9')">Undo</button>
+                <button class="mark-button" onclick="markAsSent(this, 'row-5')">Mark as Sent</button>
+                <button class="undo-button" onclick="undoSent(this, 'row-5')">Undo</button>
             </td>
         </tr>
-		<tr id="row-6">
+        <tr id="row-6">
             <td><a href="https://sciencesmaths-paris.fr/en/nos-programmes-en/postdocs">FSMP Postdoctoral Program</a></td>
             <td>November 27th</td>
             <td>
@@ -152,18 +168,17 @@
                 <button class="undo-button" onclick="undoSent(this, 'row-8')">Undo</button>
             </td>
         </tr>
-		<tr id="row-5">
-            <td><a href="https://www.ihes.fr/en/applications/post-docs/simons-foundation/">IHES post-doctoral offers</a></td>
-            <td>December 2nd</td>
+        <tr id="row-9">
+            <td><a href="#">Titchmarsh Research Fellow</a></td>
+            <td>November 22nd</td>
             <td>
-                <button class="mark-button" onclick="markAsSent(this, 'row-5')">Mark as Sent</button>
-                <button class="undo-button" onclick="undoSent(this, 'row-5')">Undo</button>
+                <button class="mark-button" onclick="markAsSent(this, 'row-9')">Mark as Sent</button>
+                <button class="undo-button" onclick="undoSent(this, 'row-9')">Undo</button>
             </td>
         </tr>
-
         <tr id="row-10">
             <td><a href="#">Berlin Mathematical School</a></td>
-            <td>December 7th</td>
+            <td>December 8th</td>
             <td>
                 <button class="mark-button" onclick="markAsSent(this, 'row-10')">Mark as Sent</button>
                 <button class="undo-button" onclick="undoSent(this, 'row-10')">Undo</button>
@@ -175,29 +190,28 @@
     <table id="under-interview">
         <tr>
             <th>Program Name</th>
-            <th>Expectated Email Date</th>
+            <th>Notes</th>
             <th>Status</th>
-        </tr>
-		<tr id="row-12">
-            <td><a href="https://www.jobs.ac.uk/job/DKB712/chapman-fellowships-in-mathematics-pure-mathematics-section">Imperial College, Chapman Fellowship</a></td>
-            <td>Mid/Late November</td>
-            <td>
-                <button class="mark-button" onclick="markAsSent(this, 'row-12')">Mark as Sent</button>
-                <button class="undo-button" onclick="undoSent(this, 'row-12')">Undo</button>
-            </td>
         </tr>
         <tr id="row-11">
             <td>HITS Independent Postdoc Program</td>
-            <td>Mid/Late November</td>
+            <td>Email expected Mid/Late November</td>
             <td>
                 <button class="mark-button" onclick="markAsSent(this, 'row-11')">Mark as Sent</button>
                 <button class="undo-button" onclick="undoSent(this, 'row-11')">Undo</button>
             </td>
         </tr>
-       
+        <tr id="row-12">
+            <td><a href="https://www.jobs.ac.uk/job/DKB712/chapman-fellowships-in-mathematics-pure-mathematics-section">Chapman Fellowship</a></td>
+            <td>Application Pending</td>
+            <td>
+                <button class="mark-button" onclick="markAsSent(this, 'row-12')">Mark as Sent</button>
+                <button class="undo-button" onclick="undoSent(this, 'row-12')">Undo</button>
+            </td>
+        </tr>
         <tr id="row-13">
             <td>Post-Docs of Excellence: Hadamard Lecturers</td>
-            <td>NA</td>
+            <td>Under consideration</td>
             <td>
                 <button class="mark-button" onclick="markAsSent(this, 'row-13')">Mark as Sent</button>
                 <button class="undo-button" onclick="undoSent(this, 'row-13')">Undo</button>
@@ -205,7 +219,7 @@
         </tr>
         <tr id="row-14">
             <td>Herchel Smith Research Fellow</td>
-            <td>NA</td>
+            <td>Pending decision</td>
             <td>
                 <button class="mark-button" onclick="markAsSent(this, 'row-14')">Mark as Sent</button>
                 <button class="undo-button" onclick="undoSent(this, 'row-14')">Undo</button>
@@ -213,13 +227,23 @@
         </tr>
         <tr id="row-15">
             <td><a href="https://www.janestreet.com/apply-graduate-research-fellowship/">Jane Street Graduate Research Fellowship</a></td>
-            <td>December</td>
+            <td>December 2nd</td>
             <td>
                 <button class="mark-button" onclick="markAsSent(this, 'row-15')">Mark as Sent</button>
                 <button class="undo-button" onclick="undoSent(this, 'row-15')">Undo</button>
             </td>
         </tr>
     </table>
+	<h2 class="section-title">Additional Materials</h2>
+    <div class="additional-materials">
+        <p>You can find additional materials linked below:</p>
+        <ul>
+            <li><a href="https://cwlin4916.github.io/Trees/Application/Postdoc/Research.pdf" target="_blank">Research Statement</a></li>
+            <li><a href="https://cwlin4916.github.io/Trees/Application/Postdoc/Teaching.pdf" target="_blank">Teaching Statement</a></li>
+            <li><a href="https://cwlin4916.github.io/Trees/Application/Postdoc/CV.pdf" target="_blank">CV</a></li>
+            <li><a href="https://cwlin4916.github.io/Trees/Application/Postdoc/Publication.pdf" target="_blank">Publications</a></li>
+        </ul>
+    </div>
 
     <script>
         // Function to mark a row as sent and store in local storage

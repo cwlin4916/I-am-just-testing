@@ -6,36 +6,33 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f5f5f5;
+            background-color: #f9f9f9;
             color: #333;
             margin: 0;
             padding: 20px;
         }
-        h1, p {
+        h1 {
             text-align: center;
-            color: #2b3e50;
+            color: #003366;
         }
         table {
-            width: 85%;
-            margin: 20px auto;
+            width: 90%;
+            margin: 0 auto;
             border-collapse: collapse;
-            background-color: #ffffff;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
         th, td {
-            padding: 10px;
+            padding: 12px;
             text-align: left;
-            border-bottom: 1px solid #ddd;
+            border: 1px solid #ddd;
         }
         th {
-            background-color: #708090;
-            color: #ffffff;
-            font-weight: 600;
+            background-color: #0180ff;
+            color: white;
         }
         a {
-            color: #2b3e50;
+            color: #0180ff;
             text-decoration: none;
         }
         a:hover {
@@ -44,49 +41,13 @@
         .section-title {
             margin-top: 50px;
             text-align: center;
-            color: #2b3e50;
-        }
-        .description {
-            width: 70%;
-            margin: 0 auto 30px auto;
-            font-size: 1.1em;
-            line-height: 1.6;
-        }
-        .marked-row {
-            background-color: #e9f7ef; /* Light green for marked rows */
-        }
-        .mark-button {
-            padding: 6px 10px;
-            background-color: #4caf50;
-            color: white;
-            border: none;
-            cursor: pointer;
-            border-radius: 4px;
-        }
-        .undo-button {
-            padding: 6px 10px;
-            background-color: #f44336;
-            color: white;
-            border: none;
-            cursor: pointer;
-            border-radius: 4px;
-        }
-        .mark-button:disabled {
-            background-color: #cccccc;
-            cursor: not-allowed;
+            color: #0180ff;
         }
     </style>
 </head>
 <body>
     <h1>Application Tracker</h1>
     
-    <div class="description">
-        <p>
-            Welcome to the application tracker. This page helps you stay organized with upcoming fellowship applications and interview conditions.
-            Please mark your completed tasks and keep track of your progress efficiently. Click 'Undo' to make changes as needed.
-        </p>
-    </div>
-
     <h2 class="section-title">Upcoming Applications (Due by November 15)</h2>
     <table>
         <tr>
@@ -94,7 +55,7 @@
             <th>Deadline</th>
         </tr>
         <tr>
-            <td><a href="#">Interfolio: Yale Gibbs Instructor and NYU</a></td>
+            <td><a href="#">Interfolio: Yale Gibbs Instructor and NYU </a></td>
             <td>November 14th</td>
         </tr>
         <tr>
@@ -105,10 +66,14 @@
             <td><a href="https://recruit.apo.ucla.edu/JPF09876">Hendrik Adjunct Professorship</a></td>
             <td>November 14th</td>
         </tr>
-        <tr>
-            <td><a href="https://www.jobs.ac.uk/job/DKB712/chapman-fellowships-in-mathematics-pure-mathematics-section">Imperial Chapman Fellowship</a></td>
-            <td>November 15th</td>
-        </tr>
+		<tr>
+			<td>
+				<a href="https://www.jobs.ac.uk/job/DKB712/chapman-fellowships-in-mathematics-pure-mathematics-section">Imperial Chapman Fellowship</a>
+			</td>
+			<td>
+				November 15th 
+			</td>
+		</tr>
         <tr>
             <td><a href="https://www.ihes.fr/en/applications/post-docs/simons-foundation/">IHES post-doctoral offers</a></td>
             <td>December 2nd</td>
@@ -117,22 +82,35 @@
             <td><a href="https://sciencesmaths-paris.fr/en/nos-programmes-en/postdocs">FSMP Postdoctoral Program</a></td>
             <td>November 27th</td>
         </tr>
-        <tr>
-            <td><a href="https://academicpositions.harvard.edu/postings/13915">CMSA Postdoctoral Fellow</a></td>
-            <td>December 1st</td>
-        </tr>
+		<tr>
+			<td>
+				<a href="https://academicpositions.harvard.edu/postings/13915">CMSA Postdoctoral Fellow</a>
+			</td>
+			<td>
+				December 1st
+			</td>
+		</tr>
         <tr>
             <td><a href="https://www.mis.mpg.de/career/postdoc">Max Planck Institute Postdoc</a></td>
             <td>December 1st</td>
         </tr>
-        <tr>
-            <td><a href="#">Titchmarsh Research Fellow</a></td>
-            <td>November 22nd</td>
-        </tr>
-        <tr>
-            <td><a href="#">Berlin Mathematical School</a></td>
-            <td>December 8th</td>
-        </tr>
+		<tr>
+			<td>
+				<a href="#">Titchmarsh Research Fellow </a>
+			</td>
+			<td>
+				November 22nd 
+			</td>
+		</tr> 
+		<tr> 
+			<td>
+				<a href="#">Berlin Mathematical School </a>
+			</td>
+			<td>
+				December 8th
+			</td>
+		</tr>
+		
     </table>
 
     <h2 class="section-title">Under Condition for Interview</h2>
@@ -157,10 +135,14 @@
             <td>Herchel Smith Research Fellow</td>
             <td>Pending decision</td>
         </tr>
-        <tr>
-            <td><a href="https://www.janestreet.com/apply-graduate-research-fellowship/">Jane Street Graduate Research Fellowship [2]</a></td>
-            <td>December 2nd</td>
-        </tr>
+		<tr>
+			<td>
+				<a href="https://www.janestreet.com/apply-graduate-research-fellowship/">Janse Street Graduate Research Fellowship [2]</a>
+			</td>
+			<td>
+				December 2nd.
+			</td>
+		</tr>
     </table>
 </body>
 </html>
