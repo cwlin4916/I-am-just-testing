@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Application Tracker</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f1f5f9;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+        h1, h2 {
+            text-align: center;
+            color: #3b82f6;
+        }
+        table {
+            width: 90%;
+            margin: 0 auto 50px;
+            border-collapse: collapse;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        th {
+            background-color: #93c5fd;
+            color: #1e3a8a;
+        }
+        a {
+            color: #1e40af;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .section-title {
+            color: #3b82f6;
+            margin-top: 30px;
+        }
+        .description {
+            text-align: center;
+            max-width: 80%;
+            margin: 0 auto 20px;
+            font-size: 1.1em;
+            color: #4b5563;
+        }
+        .marked-row {
+            background-color: #dbeafe;
+        }
+        .mark-button, .undo-button {
+            padding: 8px 12px;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+        .mark-button {
+            background-color: #3b82f6;
+            color: white;
+        }
+        .undo-button {
+            background-color: #f87171;
+            color: white;
+            display: none;
+        }
+        .mark-button:disabled {
+            background-color: #a5b4fc;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <h1>Milton's Application Tracker</h1>
+    
+    <p class="description">This page helps keep track of applications and interview opportunities. Click "Mark as Sent" once a letter is sent to update the status.</p>
+
+    <h2 class="section-title">Upcoming Applications (Due by November 15)</h2>
+    <table id="upcoming-applications">
+        <tr>
+            <th>Fellowship Name</th>
+            <th>Deadline (ET) </th>
+            <th>Status</th>
+        </tr>
+        <tr id="row-1">
+            <td><a href="#">Interfolio: Yale Gibbs Instructor and NYU</a></td>
+            <td>November 14th</td>
+            <td>
+                <button class="mark-button" onclick="markAsSent(this, 'row-1')">Mark as Sent</button>
+                <button class="undo-button" onclick="undoSent(this, 'row-1')">Undo</button>
+            </td>
+        </tr>
+        <tr id="row-2">
+            <td><a href="https://recruit.apo.ucla.edu/JPF09878">UCLA Assistant Adjunct Professorship</a></td>
+            <td>November 14th</td>
+            <td>
+                <button class="mark-button" onclick="markAsSent(this, 'row-2')">Mark as Sent</button>
+                <button class="undo-button" onclick="undoSent(this, 'row-2')">Undo</button>
+            </td>
+        </tr>
+        <tr id="row-3">
+            <td><a href="https://recruit.apo.ucla.edu/JPF09876">Hendrik Adjunct Professorship</a></td>
+            <td>November 14th</td>
+            <td>
+                <button class="mark-button" onclick="markAsSent(this, 'row-3')">Mark as Sent</button>
+                <button class="undo-button" onclick="undoSent(this, 'row-3')">Undo</button>
+            </td>
+        </tr>
+        <!-- <tr id="row-4">
+            <td><a href="https://www.jobs.ac.uk/job/DKB712/chapman-fellowships-in-mathematics-pure-mathematics-section">Imperial Chapman Fellowship</a></td>
+            <td>November 14th</td>
+            <td>
+                <button class="mark-button" onclick="markAsSent(this, 'row-4')">Mark as Sent</button>
+                <button class="undo-button" onclick="undoSent(this, 'row-4')">Undo</button>
+            </td>
+        </tr> -->
+        
+        <tr id="row-9">
+            <td><a href="#">Titchmarsh Research Fellow</a></td>
+            <td>November 22nd</td>
+            <td>
+                <button class="mark-button" onclick="markAsSent(this, 'row-9')">Mark as Sent</button>
+                <button class="undo-button" onclick="undoSent(this, 'row-9')">Undo</button>
+            </td>
+        </tr>
+		<tr id="row-6">
+            <td><a href="https://sciencesmaths-paris.fr/en/nos-programmes-en/postdocs">FSMP Postdoctoral Program</a></td>
+            <td>November 27th</td>
+            <td>
+                <button class="mark-button" onclick="markAsSent(this, 'row-6')">Mark as Sent</button>
+                <button class="undo-button" onclick="undoSent(this, 'row-6')">Undo</button>
+            </td>
+        </tr>
+        <tr id="row-7">
+            <td><a href="https://academicpositions.harvard.edu/postings/13915">CMSA Postdoctoral Fellow</a></td>
+            <td>December 1st</td>
+            <td>
+                <button class="mark-button" onclick="markAsSent(this, 'row-7')">Mark as Sent</button>
+                <button class="undo-button" onclick="undoSent(this, 'row-7')">Undo</button>
+            </td>
+        </tr>
+        <tr id="row-8">
+            <td><a href="https://www.mis.mpg.de/career/postdoc">Max Planck Institute Postdoc</a></td>
+            <td>December 1st</td>
+            <td>
+                <button class="mark-button" onclick="markAsSent(this, 'row-8')">Mark as Sent</button>
+                <button class="undo-button" onclick="undoSent(this, 'row-8')">Undo</button>
+            </td>
+        </tr>
+		<tr id="row-5">
+            <td><a href="https://www.ihes.fr/en/applications/post-docs/simons-foundation/">IHES post-doctoral offers</a></td>
+            <td>December 2nd</td>
+            <td>
+                <button class="mark-button" onclick="markAsSent(this, 'row-5')">Mark as Sent</button>
+                <button class="undo-button" onclick="undoSent(this, 'row-5')">Undo</button>
+            </td>
+        </tr>
+
+        <tr id="row-10">
+            <td><a href="#">Berlin Mathematical School</a></td>
+            <td>December 7th</td>
+            <td>
+                <button class="mark-button" onclick="markAsSent(this, 'row-10')">Mark as Sent</button>
+                <button class="undo-button" onclick="undoSent(this, 'row-10')">Undo</button>
+            </td>
+        </tr>
+    </table>
+
+    <h2 class="section-title">Under Condition for Interview</h2>
+    <table id="under-interview">
+        <tr>
+            <th>Program Name</th>
+            <th>Expectated Email Date</th>
+            <th>Status</th>
+        </tr>
+		<tr id="row-12">
+            <td><a href="https://www.jobs.ac.uk/job/DKB712/chapman-fellowships-in-mathematics-pure-mathematics-section">Imperial College, Chapman Fellowship</a></td>
+            <td>Mid/Late November</td>
+            <td>
+                <button class="mark-button" onclick="markAsSent(this, 'row-12')">Mark as Sent</button>
+                <button class="undo-button" onclick="undoSent(this, 'row-12')">Undo</button>
+            </td>
+        </tr>
+        <tr id="row-11">
+            <td>HITS Independent Postdoc Program</td>
+            <td>Mid/Late November</td>
+            <td>
+                <button class="mark-button" onclick="markAsSent(this, 'row-11')">Mark as Sent</button>
+                <button class="undo-button" onclick="undoSent(this, 'row-11')">Undo</button>
+            </td>
+        </tr>
+       
+        <tr id="row-13">
+            <td>Post-Docs of Excellence: Hadamard Lecturers</td>
+            <td>NA</td>
+            <td>
+                <button class="mark-button" onclick="markAsSent(this, 'row-13')">Mark as Sent</button>
+                <button class="undo-button" onclick="undoSent(this, 'row-13')">Undo</button>
+            </td>
+        </tr>
+        <tr id="row-14">
+            <td>Herchel Smith Research Fellow</td>
+            <td>NA</td>
+            <td>
+                <button class="mark-button" onclick="markAsSent(this, 'row-14')">Mark as Sent</button>
+                <button class="undo-button" onclick="undoSent(this, 'row-14')">Undo</button>
+            </td>
+        </tr>
+        <tr id="row-15">
+            <td><a href="https://www.janestreet.com/apply-graduate-research-fellowship/">Jane Street Graduate Research Fellowship</a></td>
+            <td>December</td>
+            <td>
+                <button class="mark-button" onclick="markAsSent(this, 'row-15')">Mark as Sent</button>
+                <button class="undo-button" onclick="undoSent(this, 'row-15')">Undo</button>
+            </td>
+        </tr>
+    </table>
+
+    <script>
+        // Function to mark a row as sent and store in local storage
+        function markAsSent(button, rowId) {
+            var row = document.getElementById(rowId);
+            row.classList.add("marked-row");
+
+            // Hide the 'Mark as Sent' button and show the 'Undo' button
+            button.style.display = "none";
+            var undoButton = row.querySelector(".undo-button");
+            undoButton.style.display = "inline-block";
+
+            // Store the marked row in local storage
+            localStorage.setItem(rowId, "sent");
+        }
+
+        // Function to undo the marking of a row
+        function undoSent(button, rowId) {
+            var row = document.getElementById(rowId);
+            row.classList.remove("marked-row");
+
+            // Show the 'Mark as Sent' button and hide the 'Undo' button
+            var markButton = row.querySelector(".mark-button");
+            markButton.style.display = "inline-block";
+            button.style.display = "none";
+
+            // Remove the marked row from local storage
+            localStorage.removeItem(rowId);
+        }
+
+        // Function to check local storage and apply the "sent" status to rows
+        function loadSentRows() {
+            var rows = document.querySelectorAll("#upcoming-applications tr, #under-interview tr");
+            rows.forEach(function(row) {
+                if (row.id && localStorage.getItem(row.id) === "sent") {
+                    var markButton = row.querySelector(".mark-button");
+                    var undoButton = row.querySelector(".undo-button");
+
+                    // If sent, apply the styles and update the buttons
+                    if (markButton && undoButton) {
+                        row.classList.add("marked-row");
+                        markButton.style.display = "none";
+                        undoButton.style.display = "inline-block";
+                    }
+                }
+            });
+        }
+
+        // Call the function on page load
+        window.onload = loadSentRows;
+    </script>
+</body>
+</html>
