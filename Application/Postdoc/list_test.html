@@ -97,15 +97,15 @@
 	<p class="description">This page lists all expected emails for letter uploads: (1) those received immediately upon my submission, and (2) those pending under the condition of an interview. <br> 
 		The "Mark as Sent" button changes the row to a lighter color to indicate that you have sent the letter. This feature uses local storage, so even if you refresh the page, it will remember which letters were marked as sent.</p>
 
-    <h2 class="section-title">Upcoming Applications (Due by November 15)</h2>
+    <h2 class="section-title">Upcoming Applications</h2>
     <table id="upcoming-applications">
         <tr>
             <th>Fellowship Name</th>
-            <th>Deadline</th>
+            <th>Deadline (ET Midnight) </th>
             <th>Status</th>
         </tr>
         <tr id="row-1">
-            <td><a href="#">Interfolio: Yale Gibbs Instructor and NYU</a></td>
+            <td><a href="#">Interfolio</a></td>
             <td>November 14th</td>
             <td>
                 <button class="mark-button" onclick="markAsSent(this, 'row-1')">Mark as Sent</button>
@@ -144,6 +144,15 @@
                 <button class="undo-button" onclick="undoSent(this, 'row-5')">Undo</button>
             </td>
         </tr>
+
+		<tr id="row-9">
+            <td><a href="#">Titchmarsh Research Fellow</a></td>
+            <td>November 22nd</td>
+            <td>
+                <button class="mark-button" onclick="markAsSent(this, 'row-9')">Mark as Sent</button>
+                <button class="undo-button" onclick="undoSent(this, 'row-9')">Undo</button>
+            </td>
+        </tr>
         <tr id="row-6">
             <td><a href="https://sciencesmaths-paris.fr/en/nos-programmes-en/postdocs">FSMP Postdoctoral Program</a></td>
             <td>November 27th</td>
@@ -152,7 +161,8 @@
                 <button class="undo-button" onclick="undoSent(this, 'row-6')">Undo</button>
             </td>
         </tr>
-        <tr id="row-7">
+       
+		<tr id="row-7">
             <td><a href="https://academicpositions.harvard.edu/postings/13915">CMSA Postdoctoral Fellow</a></td>
             <td>December 1st</td>
             <td>
@@ -168,14 +178,7 @@
                 <button class="undo-button" onclick="undoSent(this, 'row-8')">Undo</button>
             </td>
         </tr>
-        <tr id="row-9">
-            <td><a href="#">Titchmarsh Research Fellow</a></td>
-            <td>November 22nd</td>
-            <td>
-                <button class="mark-button" onclick="markAsSent(this, 'row-9')">Mark as Sent</button>
-                <button class="undo-button" onclick="undoSent(this, 'row-9')">Undo</button>
-            </td>
-        </tr>
+       
         <tr id="row-10">
             <td><a href="#">Berlin Mathematical School</a></td>
             <td>December 8th</td>
@@ -187,15 +190,14 @@
     </table>
 
     <h2 class="section-title">Under Condition for Interview</h2>
+	<p class="description">If (ever) accepted, you should expect a separate email from November to January. </p>
     <table id="under-interview">
         <tr>
             <th>Program Name</th>
-            <th>Notes</th>
             <th>Status</th>
         </tr>
         <tr id="row-11">
             <td>HITS Independent Postdoc Program</td>
-            <td>Email expected Mid/Late November</td>
             <td>
                 <button class="mark-button" onclick="markAsSent(this, 'row-11')">Mark as Sent</button>
                 <button class="undo-button" onclick="undoSent(this, 'row-11')">Undo</button>
@@ -203,7 +205,6 @@
         </tr>
         <tr id="row-12">
             <td><a href="https://www.jobs.ac.uk/job/DKB712/chapman-fellowships-in-mathematics-pure-mathematics-section">Chapman Fellowship</a></td>
-            <td>Application Pending</td>
             <td>
                 <button class="mark-button" onclick="markAsSent(this, 'row-12')">Mark as Sent</button>
                 <button class="undo-button" onclick="undoSent(this, 'row-12')">Undo</button>
@@ -211,7 +212,6 @@
         </tr>
         <tr id="row-13">
             <td>Post-Docs of Excellence: Hadamard Lecturers</td>
-            <td>Under consideration</td>
             <td>
                 <button class="mark-button" onclick="markAsSent(this, 'row-13')">Mark as Sent</button>
                 <button class="undo-button" onclick="undoSent(this, 'row-13')">Undo</button>
@@ -219,7 +219,6 @@
         </tr>
         <tr id="row-14">
             <td>Herchel Smith Research Fellow</td>
-            <td>Pending decision</td>
             <td>
                 <button class="mark-button" onclick="markAsSent(this, 'row-14')">Mark as Sent</button>
                 <button class="undo-button" onclick="undoSent(this, 'row-14')">Undo</button>
@@ -227,7 +226,6 @@
         </tr>
         <tr id="row-15">
             <td><a href="https://www.janestreet.com/apply-graduate-research-fellowship/">Jane Street Graduate Research Fellowship</a></td>
-            <td>December 2nd</td>
             <td>
                 <button class="mark-button" onclick="markAsSent(this, 'row-15')">Mark as Sent</button>
                 <button class="undo-button" onclick="undoSent(this, 'row-15')">Undo</button>

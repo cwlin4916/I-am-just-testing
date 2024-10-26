@@ -5,55 +5,102 @@
     <title>Milton's Application Tracker</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f9f9f9;
+            font-family: 'Noto Sans JP', sans-serif;
+            background-color: #f5f5f5;
             color: #333;
             margin: 0;
             padding: 20px;
+            line-height: 1.6;
         }
-        h1 {
+        h1, h2 {
             text-align: center;
-            color: #003366;
+            color: #1e40af;
         }
         table {
             width: 90%;
-            margin: 0 auto;
+            margin: 0 auto 50px;
             border-collapse: collapse;
             background-color: white;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
         th, td {
-            padding: 12px;
+            padding: 10px;
             text-align: left;
-            border: 1px solid #ddd;
+            border-bottom: 1px solid #e5e7eb;
+            font-size: 0.85em;
         }
         th {
-            background-color: #0180ff;
-            color: white;
+            background-color: #93c5fd;
+            color: #1e3a8a;
         }
         a {
-            color: #0180ff;
+            color: #1e40af;
             text-decoration: none;
         }
         a:hover {
             text-decoration: underline;
         }
         .section-title {
-            margin-top: 50px;
+            color: #3b82f6;
+            margin-top: 30px;
+            font-size: 1.2em;
+        }
+        .description {
             text-align: center;
-            color: #0180ff;
+            max-width: 80%;
+            margin: 0 auto 20px;
+            font-size: 0.9em;
+            color: #4b5563;
+        }
+        .marked-row {
+            background-color: #e0f2fe;
+        }
+        .mark-button, .undo-button {
+            padding: 6px 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: 0.85em;
+        }
+        .mark-button {
+            background-color: #3b82f6;
+            color: white;
+        }
+        .undo-button {
+            background-color: #f87171;
+            color: white;
+            display: none;
+        }
+        .mark-button:disabled {
+            background-color: #a5b4fc;
+            cursor: not-allowed;
+        }
+        .additional-materials {
+            max-width: 90%;
+            margin: 20px auto;
+            font-size: 0.85em;
+            color: #333;
+        }
+        .additional-materials a {
+            color: #1e40af;
+            text-decoration: none;
+        }
+        .additional-materials a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
     <h1>Application Tracker</h1>
-	<h2 class="section-title">To apply / Applied </h2>
+	<h2 class="section-title">Applications </h2>
 	<table>
 		<tr>
 			<th>Fellowship Name</th>
 			<th>Deadline </th>
-			<th>Notes </th>
-			<th>Responses</th>
+            <th> Applied </th>
+            <th> Email Sent </th>
+            <th>Notes </th>
 		</tr>
 		<tr>
 			<td>Duke, Elliott and Griffiths Assistant Research Professors</td>
@@ -68,18 +115,12 @@
         <tr>
 			<td>Stanford Szego</td>
 			<td>November 20th </td>
-			<td> Applied! NEs </td>
+			<td> Yes </td>
+            <td> No </td>
 		</tr>
         <tr>
             <td>MIT, inaugural postdoctoral fellowship program</td>
-            <td>November 15th</td>
-        </tr>
-	</table>
-    <h2 class="section-title">Upcoming Applications (Due by November 15)</h2>
-    <table>
-        <tr>
-            <th>Fellowship Name</th>
-            <th>Deadline</th>
+            <td>November 1</td>
         </tr>
         <tr>
             <td><a href="#">Yale Interfolio</a></td>
@@ -93,6 +134,10 @@
             <td><a href="https://recruit.apo.ucla.edu/JPF09876">Hendrik Adjunct Professorship</a></td>
             <td>November 14th</td>
         </tr>
+        <tr>
+            <td> Benjamin Peirce Fellow in Mathematics </td>
+            <td> November 15th / ASAP </td>
+        </tr>
 		<tr>
 			<td>
 				<a href="https://www.jobs.ac.uk/job/DKB712/chapman-fellowships-in-mathematics-pure-mathematics-section">Imperial Chapman Fellowship</a>
@@ -101,6 +146,12 @@
 				November 15th 
 			</td>
 		</tr>
+        <tr>
+            <td>Joseph F. Ritt Assistant Professorships</td>
+            <td>December 1st</td>
+            <td>No</td>
+            <td>No</td>
+        </tr>
         <tr>
             <td><a href="https://www.ihes.fr/en/applications/post-docs/simons-foundation/">IHES post-doctoral offers</a></td>
             <td>December 2nd</td>
@@ -129,15 +180,6 @@
 				November 22nd 
 			</td>
 		</tr>
-		
-    </table>
-
-    <h2 class="section-title">Under Condition for Interview</h2>
-    <table>
-        <tr>
-            <th>Program Name</th>
-            <th>Notes</th>
-        </tr>
         <tr>
             <td>HITS Independent Postdoc Program</td>
             <td>Email expected Mid/Late November</td>
