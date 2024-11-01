@@ -17,7 +17,7 @@
 
         img {
             display: block;
-            width: 15%;
+            max-width: 15%;
             height: auto;
             border-radius: 15px;
             margin-bottom: 20px;
@@ -70,7 +70,7 @@
     <h1><span class="panda">Panda</span> і <span class="dracon">Дракон</span></h1>
     <p>дні маленької панди і маленького, маленького дракона</p>
 
-    <img src="../photos/Anna/panda_dracon1.jpg" alt="Panda і Дракон" style="width: 25%; height:auto;">
+    <img src="../photos/Anna/panda_dracon1.jpg" alt="Panda і Дракон">
 
     <p class="aphorism">Осінь — це друге весна, коли кожен листок — квітка.</p>
     <br>
@@ -78,7 +78,7 @@
     <p> А зазвичай... Анна зайнята своїм графіком. </p>
     <img src="../photos/Anna/compiling_anna.png" alt="Compiling Anna">
     <p> Ми разом піднімаємося до вершин </p>
-    <img src="../photos/Anna/Climb1.png" alt="Climbing" style="width:10%; height:auto;">
+    <img src="../photos/Anna/Climb1.png" alt="Climbing">
     <p> що таке осінь? </p>
     <img src="../photos/Anna/pandi130824.jpg" alt="Autumn Panda">
     <p>Інколи дракон буває збентежений</p>
@@ -105,13 +105,13 @@
             this.style.display = 'none';
 
             var resultElement = document.getElementById('result');
-            var letters = 'BrumZabruchiVrumBroooooooooomBrumBrummmm';
+            var letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
             var randomTextInterval;
 
             // Function to generate random letters
             function displayRandomLetters() {
                 var randomText = '';
-                for (var i = 0; i < 15; i++) {
+                for (var i = 0; i < 10; i++) {
                     randomText += letters.charAt(Math.floor(Math.random() * letters.length));
                 }
                 resultElement.textContent = randomText;
