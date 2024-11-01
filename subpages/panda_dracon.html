@@ -2,9 +2,12 @@
 <html lang="uk">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panda і Дракон</title>
     <style>
+        
         body {
             font-family: 'Courier New', cursive;
             margin: 0;
@@ -43,27 +46,34 @@
             font-size: 0.7em;
             margin-top: 30px;
         }
+		/* Button styling */
+		#compute-button {
+			background-color: #add8e6; /* Light blue background */
+			color: #000; /* Black text */
+			font-family: 'Courier New', cursive;
+			font-size: 1em;
+			padding: 10px 20px;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+			margin: 20px 0;
+			display: flex;
+			align-items: center;
+			gap: 10px; /* Space between icon and text */
+		}
 
-        /* Button styling */
-        #compute-button {
-            background-color: #add8e6; /* Light blue background */
-            color: #000; /* Black text */
-            font-family: 'Courier New', cursive;
-            font-size: 1em;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin: 20px 0;
-        }
+		#compute-button i {
+			font-size: 1.2em;
+		}
 
-        /* Result text styling */
-        #result {
-            font-size: 1em;
-            color: #000;
-            font-family: 'Courier New', cursive;
-            margin: 20px 0;
-        }
+		/* Result text styling */
+		#result {
+			font-size: 1em;
+			color: #000;
+			font-family: 'Courier New', cursive;
+			margin: 20px 0;
+		}
+
     </style>
 </head>
 <body>
@@ -92,8 +102,15 @@
     <p>дракон може часто злитися на панду</p>
     <img src="../photos/Anna/dragon_angry_at_panda.png" alt="Angry Panda and Dragon">
 	<br> 
-    <!-- Add the button -->
-    <button id="compute-button">Compute Panda's current location.</button>
+
+	<p> дракону потрібно часто заряджати акумулятор </p>
+	<img src="../photos/Anna/cat_dragon.png" alt="Cat Dragon" style="width: 10%; height: auto;">
+	<br> 
+   
+
+	<button id="compute-button">
+        <i class="fas fa-paw"></i> Compute Panda's current location.
+    </button>
 
     <!-- Element to display random letters and final message -->
     <p id="result"></p>
@@ -105,7 +122,7 @@
             this.style.display = 'none';
 
             var resultElement = document.getElementById('result');
-            var letters = 'BrumZabruchiVrumBroooooooooomBrumBrummmm';
+            var letters = 'Brum Zabruchi VroomBroooooooooom BrumBrummmm';
             var randomTextInterval;
 
             // Function to generate random letters
@@ -127,22 +144,74 @@
                 // Get current time
                 var now = new Date();
                 var hours = now.getHours();
-                var day = now.getDay(); // 0 (Sunday) to 6 (Saturday)
+                var dayIndex = now.getDay(); // 0 (Sunday) to 6 (Saturday)
+                var daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+                var dayName = daysOfWeek[dayIndex];
 
-                // Check if it's a weekday (Monday to Friday)
-                var isWeekday = day >= 1 && day <= 5;
+                // Lookup table for locations
+                var locationTable = {
+                    'Monday': {
+                        9: 'At the library',
+                        10: 'In the cafe',
+                        11: 'Attending a lecture',
+                        14: 'In the lab',
+                        16: 'At the gym',
+                        // Add more hours as needed
+                    },
+                    'Tuesday': {
+                        8: 'Morning run in the park',
+                        12: 'Having lunch with friends',
+                        15: 'Studying in the library',
+                        // Add more hours as needed
+                    },
+                    'Wednesday': {
+                        9: 'In a team meeting',
+                        13: 'Working on a project',
+                        18: 'Attending a workshop',
+                        // Add more hours as needed
+                    },
+                    'Thursday': {
+                        10: 'Visiting the museum',
+                        14: 'Practicing piano',
+                        19: 'Watching a movie',
+                        // Add more hours as needed
+                    },
+                    'Friday': {
+							11: 'Waiting for drakon to finish her Japanese class.',
+							12: 'Waiting for drakon...Brum!',
+							13: 'Eating with drakon!',
+							14: 'Teaching on Campus, Room 204.',
+							20: 'Reading a book at home',
+							// Add more hours as needed
+						},
+                    'Saturday': {
+                        10: 'Hiking in the mountains',
+                        15: 'Picnic by the lake',
+                        21: 'Stargazing',
+                        // Add more hours as needed
+                    },
+                    'Sunday': {
+                        9: 'Attending a yoga class',
+                        12: 'Brunch with friends',
+                        16: 'Visiting grandparents',
+                        // Add more hours as needed
+                    }
+                };
 
-                if (isWeekday && hours >= 7 && hours < 12) {
-                    resultElement.textContent = 'Morning Mugs!';
-                } else if (hours >= 12 && hours < 20) {
-                    resultElement.textContent = 'Thinking about dragon, but location cannot be computed.';
-                } else if (hours >= 20 || hours < 7) {
-                    resultElement.textContent = 'Preparing to make a dragon role.';
+                // Check if there's an entry for the current day and hour
+                if (locationTable[dayName] && locationTable[dayName][hours]) {
+                    var location = locationTable[dayName][hours];
+                    resultElement.textContent = '🐼 is currently: ' + location;
                 } else {
-                    resultElement.textContent = 'Unable to compute location at this time.';
+                    resultElement.textContent = 'A little hard to compute, panda is moving very fast!';
                 }
             }, 3000);
         });
     </script>
+	
 </body>
 </html>
+
+
+
+
