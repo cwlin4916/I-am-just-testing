@@ -142,155 +142,79 @@
     
     <!-- JavaScript code -->
     <script>
-        let isUkrainianTimeZone = false;
-
-        // Toggle button event listener
+        // Variable to track which time zone is currently displayed
+        let isShowingUkrainianTimeZone = true;
+    
+        // Function to adjust time based on current toggle state
+        function getAdjustedTime() {
+            let now = new Date();
+    
+            // Check if we need to switch to Eastern Time or Ukrainian Time
+            if (isShowingUkrainianTimeZone) {
+                // User time is assumed Ukrainian (UTC+2 or UTC+3), adjust to ET (UTC-5 or UTC-4)
+                now.setHours(now.getHours() - (now.getTimezoneOffset() / 60) - 7); // Adjust to Eastern Time (UTC-5)
+            } else {
+                // User time is assumed Eastern, adjust to Ukrainian time (UTC+2)
+                now.setHours(now.getHours() + (now.getTimezoneOffset() / 60) + 2); // Adjust to Ukrainian Time (UTC+2)
+            }
+            return now;
+        }
+    
+        // Toggle button to switch between time zones
         document.getElementById('timezone-toggle').addEventListener('click', function() {
-            isUkrainianTimeZone = !isUkrainianTimeZone;
-            this.innerHTML = isUkrainianTimeZone 
-                ? '<i class="fas fa-paw"></i> Switch to Local Time Zone' 
+            isShowingUkrainianTimeZone = !isShowingUkrainianTimeZone;
+            this.innerHTML = isShowingUkrainianTimeZone
+                ? '<i class="fas fa-paw"></i> Switch to Eastern Time Zone'
                 : '<i class="fas fa-paw"></i> Switch to Ukrainian Time Zone';
         });
-
+    
+        // Event listener for the compute button
         document.getElementById('compute-button').addEventListener('click', function() {
             this.style.display = 'none';
-
-            var resultElement = document.getElementById('result');
-            var letters = 'Brum Zabruchi VroomBroooooooooom BrumBrummmm';
-            var randomTextInterval;
-
+    
+            let resultElement = document.getElementById('result');
+            let letters = 'Brum Zabruchi VroomBroooooooooom BrumBrummmm';
+            let randomTextInterval;
+    
             function displayRandomLetters() {
-                var randomText = '';
-                for (var i = 0; i < 15; i++) {
+                let randomText = '';
+                for (let i = 0; i < 15; i++) {
                     randomText += letters.charAt(Math.floor(Math.random() * letters.length));
                 }
                 resultElement.textContent = randomText;
             }
-
+    
+            // Display random letters for 3 seconds before showing the final message
             randomTextInterval = setInterval(displayRandomLetters, 100);
-
+    
             setTimeout(function() {
                 clearInterval(randomTextInterval);
-                
-                var now = new Date();
-                
-                // Adjust to Ukrainian time if toggled
-                if (isUkrainianTimeZone) {
-                    now.setHours(now.getHours() + (now.getTimezoneOffset() / 60) + 2); // Adjust for UTC+2 or +3
-                }
-
-                var hours = now.getHours();
-                var minutes = now.getMinutes();
+    
+                let now = getAdjustedTime();
+    
+                let hours = now.getHours();
+                let minutes = now.getMinutes();
                 minutes = minutes < 30 ? '00' : '30';
-                var hoursString = hours.toString().padStart(2, '0');
-                var timeKey = hoursString + ':' + minutes;
-
-                var dayIndex = now.getDay(); 
-                var daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-                var dayName = daysOfWeek[dayIndex];
-
-                var locationTable = {
-                    'Monday': {
-                        '09:00': 'At the library',
-                        '09:30': 'At the library',
-                        '10:00': 'In the cafe',
-                        '10:30': 'In the cafe',
-                        '11:00': 'Waiting for drakon to finish her Japanese class.',
-                        '11:30': 'Waiting for drakon to finish her Japanese class.',
-                        '12:00': 'Waiting for drakon...Brum!',
-                        '12:30': 'Waiting for drakon...Brum!',
-                        '14:00': 'In the lab',
-                        '14:30': 'In the lab',
-                        '16:00': 'At the gym',
-                        '16:30': 'At the gym',
-                        '17:00': 'Class',
-                        '17:30': 'Class',
-                        // Add more intervals as needed
-                    },
-                    'Tuesday': {
-                        '08:00': 'Morning run in the park',
-                        '08:30': 'Morning run in the park',
-                        '12:00': 'Having lunch with friends',
-                        '12:30': 'Having lunch with friends',
-                        '15:00': 'Studying in the library',
-                        '15:30': 'Studying in the library',
-                        // Add more intervals as needed
-                    },
-                    'Wednesday': {
-                        '09:00': 'In a team meeting',
-                        '09:30': 'In a team meeting',
-                        '13:00': 'Working on a project',
-                        '13:30': 'Working on a project',
-                        '18:00': 'Attending a workshop',
-                        '18:30': 'Attending a workshop',
-                        // Add more intervals as needed
-                    },
-                    'Thursday': {
-                        '10:00': 'Visiting the museum',
-                        '10:30': 'Visiting the museum',
-                        '14:00': 'Practicing piano',
-                        '14:30': 'Practicing piano',
-                        '19:00': 'Watching a movie',
-                        '19:30': 'Watching a movie',
-                        // Add more intervals as needed
-                    },
-                    'Friday': {
-                        '11:00': 'Waiting for drakon to finish her Japanese class.',
-                        '11:30': 'Waiting for drakon to finish her Japanese class.',
-                        '12:00': 'Waiting for drakon...Brum!',
-                        '12:30': 'Waiting for drakon...Brum!',
-                        '13:00': 'Eating with drakon!',
-                        '13:30': 'Eating with drakon!',
-                        '14:00': 'Teaching on Campus, Room 204.',
-                        '14:30': 'Teaching on Campus, Room 204.',
-                        '15:00': 'Heading for purple, maybe finished(?)',
-                        '15:30': 'Heading for purple, maybe finished(?)',
-                        '16:00': 'Thinking about climbing...',
-                        '16:30': 'Thinking about climbing...',
-                        '17:00': 'Moving around - seems to be lost!',
-                        '17:30': 'Climbing with drakon!',
-                        '18:00': 'Iiiiii',
-                        '18:30': 'Thinking about dinner.',
-                        '19:00': 'Missing dragon. Needs a kiss.',
-                        '19:30': 'IiiiiI!?',
-                        '20:00': 'Reading a book at home - or working.',
-                        '20:30': 'Eating with drakon.',
-                        '21:00': 'Eating dinner with drakon',
-                        '21:30': 'Eating dinner with drakon',
-                        '22:00': 'Ice cream with drakon',
-                        '22:30': 'Ice cream with drakon',
-                        '23:00': 'Panda Roll!',
-                        '23:30': 'Looks at sleeping drakon.',
-                        '00:00': 'Maybe showering. Brum Brum!',
-                        '00:30': 'Kisses drakon goodnight.',
-                        '01:00': 'Sleeping',
-                        '01:30': 'Very sleeeepy',
-                        // Add more intervals as needed
-                    },
-                    'Saturday': {
-                        '09:00': 'Ovenbakery',
-                        '09:30': 'Eating breakfast',
-                        '10:00': 'Reading his favourite book...',
-                        '10:30': 'Reading his favourite book...',
-                        '15:00': 'Picnic by the lake',
-                        '15:30': 'Picnic by the lake',
-                        '21:00': 'Stargazing',
-                        '21:30': 'Stargazing',
-                        // Add more intervals as needed
-                    },
-                    'Sunday': {
-                        '09:00': 'Attending a yoga class',
-                        '09:30': 'Attending a yoga class',
-                        '12:00': 'Brunch with friends',
-                        '12:30': 'Brunch with friends',
-                        '16:00': 'Visiting grandparents',
-                        '16:30': 'Visiting grandparents',
-                        // Add more intervals as needed
-                    }
+                let hoursString = hours.toString().padStart(2, '0');
+                let timeKey = hoursString + ':' + minutes;
+    
+                let dayIndex = now.getDay();
+                let daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+                let dayName = daysOfWeek[dayIndex];
+    
+                let locationTable = {
+                    'Monday': { '09:00': 'At the library', '10:00': 'In the cafe', /* Add more times */ },
+                    'Tuesday': { '08:00': 'Morning run in the park', /* Add more times */ },
+                    'Wednesday': { '09:00': 'In a team meeting', /* Add more times */ },
+                    'Thursday': { '10:00': 'Visiting the museum', /* Add more times */ },
+                    'Friday': { '11:00': 'Waiting for drakon', /* Add more times */ },
+                    'Saturday': { '00:00': 'Ovenbakery', /* Add more times */ },
+                    'Sunday': { '09:00': 'Attending a yoga class', /* Add more times */ }
                 };
-
+    
+                // Display the location based on current day and time
                 if (locationTable[dayName] && locationTable[dayName][timeKey]) {
-                    var location = locationTable[dayName][timeKey];
+                    let location = locationTable[dayName][timeKey];
                     resultElement.textContent = '🐼 is currently: ' + location;
                 } else {
                     resultElement.textContent = 'A little hard to compute, panda is moving very fast!';

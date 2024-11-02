@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panda і Дракон</title>
+        <!-- Toggle Button for Ukrainian Time Zone -->
+
+    <style>
+        
+        body {
+            font-family: 'Courier New', cursive;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        img {
+            display: block;
+            width: 30%;
+            height: auto;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            opacity: 0.8;
+        }
+
+        h1 {
+            font-size: 1.5em;
+            color: #0057b7;
+        }
+
+        h1 .dracon {
+            color: #ffd700;
+        }
+
+        p {
+            font-size: 1em;
+            color: #000;
+            font-family: 'Courier New', cursive;
+        }
+
+        .aphorism {
+            font-size: 0.7em;
+            margin-top: 30px;
+        }
+		/* Button styling */
+		#compute-button {
+			background-color: #add8e6; /* Light blue background */
+			color: #000; /* Black text */
+			font-family: 'Courier New', cursive;
+			font-size: 1em;
+			padding: 10px 20px;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+			margin: 20px 0;
+			display: flex;
+			align-items: center;
+			gap: 10px; /* Space between icon and text */
+		}
+
+		#compute-button i {
+			font-size: 1.2em;
+		}
+
+		/* Result text styling */
+		#result {
+			font-size: 1em;
+			color: #000;
+			font-family: 'Courier New', cursive;
+			margin: 20px 0;
+		}
+     /* Reusable styling for both buttons */
+     .styled-button {
+        background-color: #add8e6; /* Light blue background */
+        color: #000; /* Black text */
+        font-family: 'Courier New', cursive;
+        font-size: 0.3em;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 10px; /* Space between icon and text */
+    }
+    .styled-button i {
+        font-size: 1.2em;
+    }
+    </style>
+</head>
+<body>
+    <h1><span class="panda">Panda</span> і <span class="dracon">Дракон</span></h1>
+    <p>дні маленької панди і маленького, маленького дракона</p>
+
+    <img src="../photos/Anna/panda_dracon1.jpg" alt="Panda і Дракон" style="width: 25%; height:auto;">
+
+    <p class="aphorism">Осінь — це друге весна, коли кожен листок — квітка.</p>
+    <br>
+    <img src="../photos/Anna/FallSchedule2024.png" alt="Fall 2024 Schedule">
+    <p> А зазвичай... Анна зайнята своїм графіком. </p>
+    <img src="../photos/Anna/compiling_anna.png" alt="Compiling Anna">
+    <p> Ми разом піднімаємося до вершин </p>
+    <img src="../photos/Anna/Climb1.png" alt="Climbing" style="width:10%; height:auto;">
+    <p> що таке осінь? </p>
+    <img src="../photos/Anna/pandi130824.jpg" alt="Autumn Panda">
+    <p>Інколи дракон буває збентежений</p>
+    <img src="../photos/Anna/anna_hw.png" alt="Anna's Homework">
+    <p>Іноді панда хоче знайти дракона</p>
+	<img src="../photos/Anna/escape_panda.png" alt="Climbing Panda" style="width: 10%; height: auto;">
+
+    <p> Сонний дракон, спи, спи, спи </p>
+    <img src="../photos/Anna/sleepy_dragon.png" alt="Sleepy Dragon">
+    
+    <p>дракон може часто злитися на панду</p>
+    <img src="../photos/Anna/dragon_angry_at_panda.png" alt="Angry Panda and Dragon">
+	<br> 
+
+	<p> дракону потрібно часто заряджати акумулятор </p>
+	<img src="../photos/Anna/cat_dragon.png" alt="Cat Dragon" style="width: 20%; height: auto;">
+	<br> 
+   
+	<div class="checkbox-container">
+        <input type="checkbox" id="ukrainian-time-checkbox">
+        <label for="ukrainian-time-checkbox">Is your computer set to Ukrainian time?</label>
+    </div>
+	
+    <!-- Compute Button -->
+    <button id="compute-button">
+        <i class="fas fa-paw"></i> Compute Panda's current location.
+    </button>
+
+    <p id="result"></p>
+
+    <!-- JavaScript code -->
+    <script>
+        document.getElementById('compute-button').addEventListener('click', function() {
+            this.style.display = 'none';
+
+            let resultElement = document.getElementById('result');
+            let letters = 'Brum Zabruchi VroomBroooooooooom BrumBrummmm';
+            let randomTextInterval;
+
+            function displayRandomLetters() {
+                let randomText = '';
+                for (let i = 0; i < 15; i++) {
+                    randomText += letters.charAt(Math.floor(Math.random() * letters.length));
+                }
+                resultElement.textContent = randomText;
+            }
+
+            randomTextInterval = setInterval(displayRandomLetters, 100);
+
+            setTimeout(function() {
+                clearInterval(randomTextInterval);
+
+                let now = new Date();
+                let isUkrainianTime = document.getElementById('ukrainian-time-checkbox').checked;
+
+                // If the checkbox is checked, assume Ukrainian time and convert to Eastern Time
+                if (isUkrainianTime) {
+                    now.setHours(now.getHours() - (now.getTimezoneOffset() / 60) - 7); // Convert from UTC+2 to UTC-5
+                }
+
+                let hours = now.getHours();
+                let minutes = now.getMinutes();
+                minutes = minutes < 30 ? '00' : '30';
+                let hoursString = hours.toString().padStart(2, '0');
+                let timeKey = hoursString + ':' + minutes;
+
+                let dayIndex = now.getDay();
+                let daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+                let dayName = daysOfWeek[dayIndex];
+
+                var locationTable = {
+                    'Monday': {
+                        '09:00': 'At the library',
+                        '09:30': 'At the library',
+                        '10:00': 'In the cafe',
+                        '10:30': 'In the cafe',
+                        '11:00': 'Waiting for drakon to finish her Japanese class.',
+                        '11:30': 'Waiting for drakon to finish her Japanese class.',
+                        '12:00': 'Waiting for drakon...Brum!',
+                        '12:30': 'Waiting for drakon...Brum!',
+                        '14:00': 'In the lab',
+                        '14:30': 'In the lab',
+                        '16:00': 'At the gym',
+                        '16:30': 'At the gym',
+                        '17:00': 'Class',
+                        '17:30': 'Class',
+                        // Add more intervals as needed
+                    },
+                    'Tuesday': {
+                        '08:00': 'Morning run in the park',
+                        '08:30': 'Morning run in the park',
+                        '12:00': 'Having lunch with friends',
+                        '12:30': 'Having lunch with friends',
+                        '15:00': 'Studying in the library',
+                        '15:30': 'Studying in the library',
+                        // Add more intervals as needed
+                    },
+                    'Wednesday': {
+                        '09:00': 'In a team meeting',
+                        '09:30': 'In a team meeting',
+                        '13:00': 'Working on a project',
+                        '13:30': 'Working on a project',
+                        '18:00': 'Attending a workshop',
+                        '18:30': 'Attending a workshop',
+                        // Add more intervals as needed
+                    },
+                    'Thursday': {
+                        '10:00': 'Visiting the museum',
+                        '10:30': 'Visiting the museum',
+                        '14:00': 'Practicing piano',
+                        '14:30': 'Practicing piano',
+                        '19:00': 'Watching a movie',
+                        '19:30': 'Watching a movie',
+                        // Add more intervals as needed
+                    },
+                    'Friday': {
+                        '11:00': 'Waiting for drakon to finish her Japanese class.',
+                        '11:30': 'Waiting for drakon to finish her Japanese class.',
+                        '12:00': 'Waiting for drakon...Brum!',
+                        '12:30': 'Waiting for drakon...Brum!',
+                        '13:00': 'Eating with drakon!',
+                        '13:30': 'Eating with drakon!',
+                        '14:00': 'Teaching on Campus, Room 204.',
+                        '14:30': 'Teaching on Campus, Room 204.',
+                        '15:00': 'Heading for purple, maybe finished(?)',
+                        '15:30': 'Heading for purple, maybe finished(?)',
+                        '16:00': 'Thinking about climbing...',
+                        '16:30': 'Thinking about climbing...',
+                        '17:00': 'Moving around - seems to be lost!',
+                        '17:30': 'Climbing with drakon!',
+                        '18:00': 'Iiiiii',
+                        '18:30': 'Thinking about dinner.',
+                        '19:00': 'Missing dragon. Needs a kiss.',
+                        '19:30': 'IiiiiI!?',
+                        '20:00': 'Reading a book at home - or working.',
+                        '20:30': 'Eating with drakon.',
+                        '21:00': 'Eating dinner with drakon',
+                        '21:30': 'Eating dinner with drakon',
+                        '22:00': 'Ice cream with drakon',
+                        '22:30': 'Ice cream with drakon',
+                        '23:00': 'Panda Roll!',
+                        '23:30': 'Looks at sleeping drakon.',
+                        '00:00': 'Maybe showering. Brum Brum!',
+                        '00:30': 'Kisses drakon goodnight.',
+                        '01:00': 'Sleeping',
+                        '01:30': 'Very sleeeepy',
+                        // Add more intervals as needed
+                    },
+                    'Saturday': {
+                        '00:00': 'Maybe showering. Brum Brum!',
+                        '00:30': 'Kisses drakon goodnight.',
+                        '01:00': 'Sleeping',
+                        '01:30': 'Very sleeeepy',
+                        '06:30': 'Waking up',
+                        '09:00': 'Ovenbakery',
+                        '09:30': 'Eating breakfast',
+                        '10:00': 'Reading his favourite book...',
+                        '10:30': 'Reading his favourite book...',
+                        '15:00': 'Picnic by the lake',
+                        '15:30': 'Picnic by the lake',
+                        '21:00': 'Stargazing',
+                        '21:30': 'Stargazing',
+                        // Add more intervals as needed
+                    },
+                    'Sunday': {
+                        '09:00': 'Attending a yoga class',
+                        '09:30': 'Attending a yoga class',
+                        '12:00': 'Brunch with friends',
+                        '12:30': 'Brunch with friends',
+                        '16:00': 'Visiting grandparents',
+                        '16:30': 'Visiting grandparents',
+                        // Add more intervals as needed
+                    }
+                };
+
+                if (locationTable[dayName] && locationTable[dayName][timeKey]) {
+                    let location = locationTable[dayName][timeKey];
+                    resultElement.textContent = '🐼 is currently: ' + location;
+                } else {
+                    resultElement.textContent = 'A little hard to compute, panda is moving very fast!';
+                }
+            }, 3000);
+        });
+    </script>
+</body>
+</html>
+
+
+
+

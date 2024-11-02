@@ -7,9 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panda і Дракон</title>
         <!-- Toggle Button for Ukrainian Time Zone -->
-    <button id="timezone-toggle" class="styled-button" style="position: absolute; top: 10px; right: 10px;">
-        <i class="fas fa-paw"></i> Switch to Ukrainian Time Zone
-    </button>
 
     <style>
         
@@ -25,7 +22,7 @@
 
         img {
             display: block;
-            width: 20%;
+            width: 30%;
             height: auto;
             border-radius: 15px;
             margin-bottom: 20px;
@@ -125,43 +122,33 @@
 	<br> 
 
 	<p> дракону потрібно часто заряджати акумулятор </p>
-	<img src="../photos/Anna/cat_dragon.png" alt="Cat Dragon" style="width: 10%; height: auto;">
+	<img src="../photos/Anna/cat_dragon.png" alt="Cat Dragon" style="width: 20%; height: auto;">
 	<br> 
    
-
-	<button id="compute-button">
+	<div class="checkbox-container">
+        <input type="checkbox" id="ukrainian-time-checkbox">
+        <label for="ukrainian-time-checkbox">Is your computer set to Ukrainian time?</label>
+    </div>
+	
+    <!-- Compute Button -->
+    <button id="compute-button">
         <i class="fas fa-paw"></i> Compute Panda's current location.
     </button>
 
-    <!-- Element to display random letters and final message -->
     <p id="result"></p>
 
     <!-- JavaScript code -->
-    
-    <!-- JavaScript code -->
-    
-    <!-- JavaScript code -->
     <script>
-        let isUkrainianTimeZone = false;
-
-        // Toggle button event listener
-        document.getElementById('timezone-toggle').addEventListener('click', function() {
-            isUkrainianTimeZone = !isUkrainianTimeZone;
-            this.innerHTML = isUkrainianTimeZone 
-                ? '<i class="fas fa-paw"></i> Switch to Local Time Zone' 
-                : '<i class="fas fa-paw"></i> Switch to Ukrainian Time Zone';
-        });
-
         document.getElementById('compute-button').addEventListener('click', function() {
             this.style.display = 'none';
 
-            var resultElement = document.getElementById('result');
-            var letters = 'Brum Zabruchi VroomBroooooooooom BrumBrummmm';
-            var randomTextInterval;
+            let resultElement = document.getElementById('result');
+            let letters = 'Brum Zabruchi VroomBroooooooooom BrumBrummmm';
+            let randomTextInterval;
 
             function displayRandomLetters() {
-                var randomText = '';
-                for (var i = 0; i < 15; i++) {
+                let randomText = '';
+                for (let i = 0; i < 15; i++) {
                     randomText += letters.charAt(Math.floor(Math.random() * letters.length));
                 }
                 resultElement.textContent = randomText;
@@ -171,23 +158,24 @@
 
             setTimeout(function() {
                 clearInterval(randomTextInterval);
-                
-                var now = new Date();
-                
-                // Adjust to Ukrainian time if toggled
-                if (isUkrainianTimeZone) {
-                    now.setHours(now.getHours() + (now.getTimezoneOffset() / 60) + 2); // Adjust for UTC+2 or +3
+
+                let now = new Date();
+                let isUkrainianTime = document.getElementById('ukrainian-time-checkbox').checked;
+
+                // If the checkbox is checked, assume Ukrainian time and convert to Eastern Time
+                if (isUkrainianTime) {
+                    now.setHours(now.getHours() - (now.getTimezoneOffset() / 60) - 7); // Convert from UTC+2 to UTC-5
                 }
 
-                var hours = now.getHours();
-                var minutes = now.getMinutes();
+                let hours = now.getHours();
+                let minutes = now.getMinutes();
                 minutes = minutes < 30 ? '00' : '30';
-                var hoursString = hours.toString().padStart(2, '0');
-                var timeKey = hoursString + ':' + minutes;
+                let hoursString = hours.toString().padStart(2, '0');
+                let timeKey = hoursString + ':' + minutes;
 
-                var dayIndex = now.getDay(); 
-                var daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-                var dayName = daysOfWeek[dayIndex];
+                let dayIndex = now.getDay();
+                let daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+                let dayName = daysOfWeek[dayIndex];
 
                 var locationTable = {
                     'Monday': {
@@ -268,6 +256,11 @@
                         // Add more intervals as needed
                     },
                     'Saturday': {
+                        '00:00': 'Maybe showering. Brum Brum!',
+                        '00:30': 'Kisses drakon goodnight.',
+                        '01:00': 'Sleeping',
+                        '01:30': 'Very sleeeepy',
+                        '06:30': 'Waking up',
                         '09:00': 'Ovenbakery',
                         '09:30': 'Eating breakfast',
                         '10:00': 'Reading his favourite book...',
@@ -290,7 +283,7 @@
                 };
 
                 if (locationTable[dayName] && locationTable[dayName][timeKey]) {
-                    var location = locationTable[dayName][timeKey];
+                    let location = locationTable[dayName][timeKey];
                     resultElement.textContent = '🐼 is currently: ' + location;
                 } else {
                     resultElement.textContent = 'A little hard to compute, panda is moving very fast!';
