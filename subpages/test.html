@@ -6,6 +6,11 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panda і Дракон</title>
+        <!-- Toggle Button for Ukrainian Time Zone -->
+    <button id="timezone-toggle" class="styled-button" style="position: absolute; top: 10px; right: 10px;">
+        <i class="fas fa-paw"></i> Switch to Ukrainian Time Zone
+    </button>
+
     <style>
         
         body {
@@ -73,7 +78,23 @@
 			font-family: 'Courier New', cursive;
 			margin: 20px 0;
 		}
-
+     /* Reusable styling for both buttons */
+     .styled-button {
+        background-color: #add8e6; /* Light blue background */
+        color: #000; /* Black text */
+        font-family: 'Courier New', cursive;
+        font-size: 0.3em;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 10px; /* Space between icon and text */
+    }
+    .styled-button i {
+        font-size: 1.2em;
+    }
     </style>
 </head>
 <body>
@@ -118,16 +139,26 @@
     <!-- JavaScript code -->
     
     <!-- JavaScript code -->
+    
+    <!-- JavaScript code -->
     <script>
+        let isUkrainianTimeZone = false;
+
+        // Toggle button event listener
+        document.getElementById('timezone-toggle').addEventListener('click', function() {
+            isUkrainianTimeZone = !isUkrainianTimeZone;
+            this.innerHTML = isUkrainianTimeZone 
+                ? '<i class="fas fa-paw"></i> Switch to Local Time Zone' 
+                : '<i class="fas fa-paw"></i> Switch to Ukrainian Time Zone';
+        });
+
         document.getElementById('compute-button').addEventListener('click', function() {
-            // Hide the button
             this.style.display = 'none';
 
             var resultElement = document.getElementById('result');
             var letters = 'Brum Zabruchi VroomBroooooooooom BrumBrummmm';
             var randomTextInterval;
 
-            // Function to generate random letters
             function displayRandomLetters() {
                 var randomText = '';
                 for (var i = 0; i < 15; i++) {
@@ -136,34 +167,28 @@
                 resultElement.textContent = randomText;
             }
 
-            // Start displaying random letters every 100ms
             randomTextInterval = setInterval(displayRandomLetters, 100);
 
-            // After 3 seconds, stop the random letters and display the final message
             setTimeout(function() {
                 clearInterval(randomTextInterval);
-
-                // Get current time
+                
                 var now = new Date();
-                var hours = now.getHours();
-                var minutes = now.getMinutes();
-
-                // Round down to the nearest 30 minutes
-                if (minutes < 30) {
-                    minutes = '00';
-                } else {
-                    minutes = '30';
+                
+                // Adjust to Ukrainian time if toggled
+                if (isUkrainianTimeZone) {
+                    now.setHours(now.getHours() + (now.getTimezoneOffset() / 60) + 2); // Adjust for UTC+2 or +3
                 }
 
-                // Format hours and minutes to ensure two digits
+                var hours = now.getHours();
+                var minutes = now.getMinutes();
+                minutes = minutes < 30 ? '00' : '30';
                 var hoursString = hours.toString().padStart(2, '0');
                 var timeKey = hoursString + ':' + minutes;
 
-                var dayIndex = now.getDay(); // 0 (Sunday) to 6 (Saturday)
+                var dayIndex = now.getDay(); 
                 var daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
                 var dayName = daysOfWeek[dayIndex];
 
-                // Lookup table for locations with 30-minute intervals
                 var locationTable = {
                     'Monday': {
                         '09:00': 'At the library',
@@ -236,6 +261,10 @@
                         '22:30': 'Ice cream with drakon',
                         '23:00': 'Panda Roll!',
                         '23:30': 'Looks at sleeping drakon.',
+                        '00:00': 'Maybe showering. Brum Brum!',
+                        '00:30': 'Kisses drakon goodnight.',
+                        '01:00': 'Sleeping',
+                        '01:30': 'Very sleeeepy',
                         // Add more intervals as needed
                     },
                     'Saturday': {
@@ -260,7 +289,6 @@
                     }
                 };
 
-                // Check if there's an entry for the current day and time
                 if (locationTable[dayName] && locationTable[dayName][timeKey]) {
                     var location = locationTable[dayName][timeKey];
                     resultElement.textContent = '🐼 is currently: ' + location;
@@ -270,7 +298,6 @@
             }, 3000);
         });
     </script>
-	
 </body>
 </html>
 
