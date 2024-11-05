@@ -111,6 +111,27 @@
     <img src="../photos/Anna/pandi130824.jpg" alt="Autumn Panda">
     <p>Інколи дракон буває збентежений</p>
     <img src="../photos/Anna/anna_hw.png" alt="Anna's Homework">
+
+    <audio id="background-music" src="/Users/miltonlin/Documents/GitHub/Trees/photos/Anna/thinking.m4a" type="audio/m4a"></audio>
+    <button id="music-button" class="styled-button">
+        <i class="fas fa-music"></i> I am a thinking drakon music. Click to play. 
+    </button>
+    <script>
+        // Select the audio element and button
+        const audioElement = document.getElementById('background-music');
+        const musicButton = document.getElementById('music-button');
+    
+        // Toggle play/pause on button click
+        musicButton.addEventListener('click', function() {
+            if (audioElement.paused) {
+                audioElement.play();
+                musicButton.textContent = 'Pause Music';
+            } else {
+                audioElement.pause();
+                musicButton.textContent = 'Play Music';
+            }
+        });
+    </script>
     <p>Іноді панда хоче знайти дракона</p>
 	<img src="../photos/Anna/escape_panda.png" alt="Climbing Panda" style="width: 10%; height: auto;">
 
@@ -318,6 +339,8 @@
             }, 3000);
         });
     </script>
+    
+        
 </body>
 </html>
 
