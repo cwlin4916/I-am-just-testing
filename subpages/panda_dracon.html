@@ -104,7 +104,19 @@
     <br>
     <img src="../photos/Anna/FallSchedule2024.png" alt="Fall 2024 Schedule">
     <p> А зазвичай... Анна зайнята своїм графіком. </p>
+    <p>Осіннє листя не падає, воно летить. Вони не поспішають, щоб знайти свій дім. </p>
+    <!-- Create a button for the auttom music  -->
+     
+
+
+
     <img src="../photos/Anna/compiling_anna.png" alt="Compiling Anna">
+    <audio id="autumn-music" src="../photos/Anna/autumnattempt.m4a" type="audio/m4a"></audio>
+    <button id="autumn-music-button" class="styled-button">
+        <i class="fas fa-music"></i> What is a leaf? Turn volume down. 
+    </button>
+
+
     <p> Ми разом піднімаємося до вершин </p>
     <img src="../photos/Anna/Climb1.png" alt="Climbing" style="width:10%; height:auto;">
     <p> що таке осінь? </p>
@@ -229,13 +241,22 @@
                         '20:00': 'Watching elections',
                         // Add more intervals as needed
                     },
-                    'Wednesday': {
-                        '09:00': 'In a team meeting',
-                        '09:30': 'In a team meeting',
-                        '13:00': 'Working on a project',
-                        '13:30': 'Working on a project',
-                        '18:00': 'Attending a workshop',
-                        '18:30': 'Attending a workshop',
+                    'Monday': {
+                        '08:00': 'Mugggeeeee',
+                        '08:30': 'thinking to play with drakon',
+                        '09:00': 'At Mugs - pando the pando',
+                        '09:30': 'Iiiiii? Pando is not moving but thinks to move.',
+                        '10:00': 'Pryvittt',
+                        '10:30': 'In the cafe',
+                        '12:00': 'Waiting for drakon...Brum!',
+                        '12:30': 'Waiting for drakon...Brum!',
+                        '13:00': 'Eating with drakon!',
+                        '13:30': 'Eating with drakon!',
+                        '14:00': 'Seminar',
+                        '15:00': 'Seminar',
+                        '17:30': 'Class',
+                        '18:00': 'Dancing pando',
+                        '20:00': 'Eating',
                         // Add more intervals as needed
                     },
                     'Thursday': {
@@ -361,6 +382,20 @@
                 secondMusicButton.textContent = 'Play Second Music';
             }
         });
+
+        //aumtum music button toggle
+        const autumnAudioElement = document.getElementById('autumn-music');
+        const autumnMusicButton = document.getElementById('autumn-music-button');
+        autumnMusicButton.addEventListener('click', function() {
+            if (autumnAudioElement.paused) {
+                autumnAudioElement.play();
+                autumnMusicButton.textContent = 'Pause Autumn Music';
+            } else {
+                autumnAudioElement.pause();
+                autumnMusicButton.textContent = 'Play Autumn Music';
+            }
+        });
+
     </script>
     
         
