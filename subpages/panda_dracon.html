@@ -116,22 +116,9 @@
     <button id="music-button" class="styled-button">
         <i class="fas fa-music"></i> I am a thinking drakon music. Click to play. 
     </button>
-    <script>
-        // Select the audio element and button
-        const audioElement = document.getElementById('background-music');
-        const musicButton = document.getElementById('music-button');
     
-        // Toggle play/pause on button click
-        musicButton.addEventListener('click', function() {
-            if (audioElement.paused) {
-                audioElement.play();
-                musicButton.textContent = 'Pause Music';
-            } else {
-                audioElement.pause();
-                musicButton.textContent = 'Play Music';
-            }
-        });
-    </script>
+
+    
     <p>Іноді панда хоче знайти дракона</p>
 	<img src="../photos/Anna/escape_panda.png" alt="Climbing Panda" style="width: 10%; height: auto;">
 
@@ -141,22 +128,30 @@
     <p>дракон може часто злитися на панду</p>
     <img src="../photos/Anna/dragon_angry_at_panda.png" alt="Angry Panda and Dragon">
 	<br> 
+    
+    <audio id="second-music" src="../photos/Anna/movingdrakonNov6.m4a" type="audio/m4a"></audio>
+    <button id="second-music-button" class="styled-button">
+    <i class="fas fa-music"></i> Drakon walking...
+    </button>
 
 	<p> дракону потрібно часто заряджати акумулятор </p>
 	<img src="../photos/Anna/cat_dragon.png" alt="Cat Dragon" style="width: 20%; height: auto;">
 	<br> 
-   
+
 	<div class="checkbox-container">
         <input type="checkbox" id="ukrainian-time-checkbox">
         <label for="ukrainian-time-checkbox">Is your computer set to Ukrainian time?</label>
     </div>
 	
+
     <!-- Compute Button -->
     <button id="compute-button">
         <i class="fas fa-paw"></i> Compute Panda's current location.
     </button>
 
     <p id="result"></p>
+
+
 
     <!-- JavaScript code -->
     <script>
@@ -337,6 +332,34 @@
                     resultElement.textContent = 'A little hard to compute, panda is moving very fast!';
                 }
             }, 3000);
+        });
+    </script>
+
+    <script>
+        // First music button toggle
+        const audioElement = document.getElementById('background-music');
+        const musicButton = document.getElementById('music-button');
+        musicButton.addEventListener('click', function() {
+            if (audioElement.paused) {
+                audioElement.play();
+                musicButton.textContent = 'Pause Music';
+            } else {
+                audioElement.pause();
+                musicButton.textContent = 'Play Music';
+            }
+        });
+    
+        // Second music button toggle
+        const secondAudioElement = document.getElementById('second-music');
+        const secondMusicButton = document.getElementById('second-music-button');
+        secondMusicButton.addEventListener('click', function() {
+            if (secondAudioElement.paused) {
+                secondAudioElement.play();
+                secondMusicButton.textContent = 'Pause Second Music';
+            } else {
+                secondAudioElement.pause();
+                secondMusicButton.textContent = 'Play Second Music';
+            }
         });
     </script>
     
