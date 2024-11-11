@@ -1,243 +1,220 @@
-import scipy.io
 import numpy as np
 import matplotlib.pyplot as plt
+from typing import List, Tuple, Dict
 from tqdm import tqdm
+from time import time
 
-def prepare_data(samples_per_class=5000, test_samples_per_class=900):
-    """
-    Prepare fixed-size training and test sets from MNIST
-    """
-    mat = scipy.io.loadmat('mnist_all.mat')
-    N = 784    # Input dimension
-    Nc = 10    # Number of classes
-
-    # Process training data
-    M = np.zeros((0,N))
-    Lab = np.zeros((Nc,0))
-    for i in range(Nc):
-        class_data = mat['train'+str(i)][:samples_per_class]
-        M = np.concatenate((M, class_data), axis=0)
-        lab1 = -np.ones((Nc, samples_per_class))
-        lab1[i,:] = 1.0
-        Lab = np.concatenate((Lab, lab1), axis=1)
-    M = 2*M/255.0-1
-    M = M.T
-
-    # Process test data
-    MT = np.zeros((0,N))
-    LabT = np.zeros((Nc,0))
-    for i in range(Nc):
-        class_data = mat['test'+str(i)][:test_samples_per_class]
-        MT = np.concatenate((MT, class_data), axis=0)
-        lab1 = -np.ones((Nc, test_samples_per_class))
-        lab1[i,:] = 1.0
-        LabT = np.concatenate((LabT, lab1), axis=1)
-    MT = 2*MT/255.0-1
-    MT = MT.T
-
-    print(f"Total training samples: {M.shape[1]} (should be {Nc*samples_per_class})")
-    print(f"Total test samples: {MT.shape[1]} (should be {Nc*test_samples_per_class})")
-    print(f"Feature dimension: {M.shape[0]} (should be {N})")
-    print(f"Number of classes: {Lab.shape[0]} (should be {Nc})")
-    
-    return M, Lab, MT, LabT
-
-def train_DAM(K, M_train, Lab_train, params):
-    """
-    Train Dense Associative Memory model
-    """
-    N = M_train.shape[0]
-    Nc = Lab_train.shape[0]
-    Num = params['Num']
-    
-    # Initialize weights
-    np.random.seed(42)  # For reproducibility
-    KS = np.random.normal(params['mu'], params['sigma'], (K, N+Nc))
-    VKS = np.zeros((K, N+Nc))
-    
-    # Prepare auxiliary matrix for labels
-    aux = -np.ones((Nc, Num*Nc))
-    for d in range(Nc):
-        aux[d,d*Num:(d+1)*Num] = 1.
-    
-    # Training loop
-    for nep in tqdm(range(params['Nep']), desc=f"Training K={K}"):
-        eps = params['eps0'] * params['f']**nep
+class HopfieldCapacityAnalysis:
+    def __init__(self, N: int, epsilon: float = 0, recovery_threshold: float = 1.0):
+        """Initialize the capacity analysis experiment with partial recovery threshold"""
+        self.N = N
+        self.epsilon = epsilon
+        self.recovery_threshold = recovery_threshold
+        print(f"\n{'='*50}")
+        print(f"Initializing Hopfield Network Capacity Analysis")
+        print(f"Network Configuration:")
+        print(f"- Neurons (N): {N}")
+        print(f"- Error tolerance (ε): {epsilon}")
+        print(f"- Recovery threshold: {recovery_threshold * 100:.0f}% match required")
+        print(f"{'='*50}\n")
         
-        # Temperature scheduling
-        if nep <= params['thresh_pret']:
-            Temp = params['Temp_in'] + (params['Temp_f']-params['Temp_in'])*nep/params['thresh_pret']
-        else:
-            Temp = params['Temp_f']
-        beta = 1./Temp**params['n']
+    def generate_patterns(self, K: int) -> np.ndarray:
+        """Generate K random binary patterns of length N"""
+        patterns = np.random.choice([-1, 1], size=(K, self.N))
+        return patterns
         
-        # Shuffle training data
-        perm = np.random.permutation(M_train.shape[1])
-        M_train = M_train[:,perm]
-        Lab_train = Lab_train[:,perm]
+    def update_state(self, state: np.ndarray, patterns: np.ndarray, n_power: int = 3) -> np.ndarray:
+        """Single update step of the network"""
+        field = np.zeros(self.N)
+        for pattern in patterns:
+            overlap = np.dot(pattern, state)
+            field += pattern * (overlap ** (n_power - 1))
+        return np.sign(field)
         
-        # Mini-batch training
-        for k in range(M_train.shape[1]//Num):
-            # Prepare batch data
-            v = M_train[:,k*Num:(k+1)*Num]
-            t_R = Lab_train[:,k*Num:(k+1)*Num]
-            t = np.reshape(t_R,(1,Nc*Num))
-            
-            # Forward pass
-            u = np.concatenate((v, -np.ones((Nc,Num))), axis=0)
-            uu = np.tile(u,(1,Nc))
-            vv = np.concatenate((uu[:N,:],aux),axis=0)
-            
-            KSvv = np.maximum(np.dot(KS,vv),0)
-            KSuu = np.maximum(np.dot(KS,uu),0)
-            Y = np.tanh(beta*np.sum(KSvv**params['n']-KSuu**params['n'], axis=0))
-            Y_R = np.reshape(Y,(Nc,Num))
-            
-            # Compute gradients and update weights
-            d_KS = np.dot(np.tile((t-Y)**(2*params['m']-1)*(1-Y)*(1+Y), (K,1))*KSvv**(params['n']-1),vv.T) - \
-                   np.dot(np.tile((t-Y)**(2*params['m']-1)*(1-Y)*(1+Y), (K,1))*KSuu**(params['n']-1),uu.T)
-            
-            VKS = params['p']*VKS + d_KS
-            nc = np.amax(np.absolute(VKS),axis=1).reshape(K,1)
-            nc[nc<params['prec']] = params['prec']
-            ncc = np.tile(nc,(1,N+Nc))
-            KS += eps*VKS/ncc
-            KS = np.clip(KS, a_min=-1., a_max=1.)
-    
-    return KS
-
-def evaluate_recovery(KS, data, labels, params):
-    """
-    Evaluate model's recovery performance by computing average bit differences
-    """
-    N = data.shape[0]
-    Nc = labels.shape[0]
-    Num = params['Num']
-    beta = 1./params['Temp_f']**params['n']
-    all_diffs = []
-    
-    aux = -np.ones((Nc, Num*Nc))
-    for d in range(Nc):
-        aux[d,d*Num:(d+1)*Num] = 1.
-    
-    for k in range(data.shape[1]//Num):
-        v = data[:,k*Num:(k+1)*Num]
+    def evolve_until_convergence(self, init_state: np.ndarray, 
+                               patterns: np.ndarray,
+                               max_steps: int = 100) -> Tuple[np.ndarray, int]:
+        """Evolve state until convergence"""
+        state = init_state.copy()
+        for step in range(max_steps):
+            new_state = self.update_state(state, patterns)
+            if np.array_equal(new_state, state):
+                return new_state, step
+            state = new_state
+        return state, max_steps
         
-        # Forward pass
-        u = np.concatenate((v, -np.ones((Nc,Num))), axis=0)
-        uu = np.tile(u,(1,Nc))
-        vv = np.concatenate((uu[:N,:],aux),axis=0)
+    def compute_recovery_score(self, final_state: np.ndarray, 
+                             patterns: np.ndarray) -> float:
+        """Compute RecK(x) - maximum overlap with stored patterns"""
+        overlaps = np.abs([np.dot(pattern, final_state) for pattern in patterns])
+        return np.max(overlaps)
         
-        KSvv = np.maximum(np.dot(KS,vv),0)
-        KSuu = np.maximum(np.dot(KS,uu),0)
-        Y = np.tanh(beta*np.sum(KSvv**params['n']-KSuu**params['n'], axis=0))
-        Y_R = np.reshape(Y,(Nc,Num))
+    def compute_alpha_K(self, K: int, n_samples: int = 1000) -> Dict:
+        """
+        Compute αK and related statistics for given K with partial recovery
+        """
+        print(f"\nAnalyzing K = {K}:")
+        print(f"- Generating {K} random patterns...")
+        patterns = self.generate_patterns(K)
         
-        # For each pattern in the batch
-        for i in range(Num):
-            v_original = v[:,i]
+        results = {
+            'partial_recoveries': 0,
+            'total_steps': 0,
+            'max_steps': 0,
+            'overlaps': []
+        }
+        
+        print(f"- Testing {n_samples} random initial states...")
+        for _ in tqdm(range(n_samples), desc=f"Processing K={K}", ncols=80):
+            init_state = np.random.choice([-1, 1], size=self.N)
+            final_state, steps = self.evolve_until_convergence(init_state, patterns)
+            rec_score = self.compute_recovery_score(final_state, patterns)
             
-            # Get recovered pattern
-            u_i = np.concatenate((v_original.reshape(-1,1), -np.ones((Nc,1))), axis=0)
-            uu_i = np.tile(u_i, (1,Nc))
-            vv_i = np.concatenate((uu_i[:N,:], aux[:,:Nc]), axis=0)
+            results['overlaps'].append(rec_score/self.N)
+            results['total_steps'] += steps
+            results['max_steps'] = max(results['max_steps'], steps)
             
-            KSvv_i = np.maximum(np.dot(KS,vv_i),0)
-            KSuu_i = np.maximum(np.dot(KS,u_i),0)
+            # Check if the recovery meets the partial threshold
+            required_overlap = self.recovery_threshold * self.N
+            if abs(rec_score - required_overlap) <= self.epsilon:
+                results['partial_recoveries'] += 1
+        
+        alpha_K = results['partial_recoveries'] / n_samples
+        avg_steps = results['total_steps'] / n_samples
+        
+        print(f"Results for K = {K}:")
+        print(f"- Partial recovery rate (αK): {alpha_K:.4f}")
+        print(f"- Average convergence steps: {avg_steps:.2f}")
+        print(f"- Maximum convergence steps: {results['max_steps']}")
+        print(f"- Average overlap: {np.mean(results['overlaps']):.4f}")
+        print(f"- Overlap std dev: {np.std(results['overlaps']):.4f}")
+        
+        return {
+            'alpha_K': alpha_K,
+            'avg_steps': avg_steps,
+            'max_steps': results['max_steps'],
+            'overlaps': results['overlaps']
+        }
+        
+    def analyze_capacity(self, K_range: List[int], n_samples: int = 1000) -> Dict[int, Dict]:
+        """Analyze capacity across different K values"""
+        print(f"\n{'='*50}")
+        print("Starting Capacity Analysis")
+        print(f"- Testing K values from {min(K_range)} to {max(K_range)}")
+        print(f"- Using {n_samples} samples per K")
+        print(f"{'='*50}\n")
+        
+        start_time = time()
+        results = {}
+        
+        for K in K_range:
+            results[K] = self.compute_alpha_K(K, n_samples)
             
-            recovered = np.dot(KS[:,:N].T, KSvv_i).mean(axis=1)
-            recovered = np.sign(recovered)
-
-            # Count different bits
-            diff = np.sum(v_original != recovered)
-            all_diffs.append(diff)
-    
-    return np.mean(all_diffs), np.std(all_diffs)
-
+            # Estimate remaining time
+            elapsed_time = time() - start_time
+            progress = K_range.index(K) + 1
+            total = len(K_range)
+            remaining_time = (elapsed_time / progress) * (total - progress)
+            
+            print(f"Progress: {progress}/{total} K values tested")
+            print(f"Elapsed time: {elapsed_time/60:.1f} minutes")
+            print(f"Estimated remaining time: {remaining_time/60:.1f} minutes\n")
+            
+        return results
+        
+    def plot_results(self, results: Dict[int, Dict]):
+        """Plot comprehensive analysis results"""
+        print("\nGenerating analysis plots...")
+        
+        # Create a figure with multiple subplots
+        plt.figure(figsize=(15, 10))
+        
+        # Plot 1: K vs αK
+        plt.subplot(221)
+        K_values = list(results.keys())
+        alpha_values = [res['alpha_K'] for res in results.values()]
+        plt.plot(K_values, alpha_values, 'bo-')
+        plt.axhline(y=0.5, color='r', linestyle='--', label='α = 0.5 (K₁/₂)')
+        plt.grid(True)
+        plt.xlabel('K (Number of Patterns)')
+        plt.ylabel('αK (Partial Recovery Rate)')
+        plt.title('Memory Capacity Analysis with Partial Recovery')
+        plt.legend()
+        
+        # Plot 2: Convergence Steps
+        plt.subplot(222)
+        avg_steps = [res['avg_steps'] for res in results.values()]
+        max_steps = [res['max_steps'] for res in results.values()]
+        plt.plot(K_values, avg_steps, 'g.-', label='Average Steps')
+        plt.plot(K_values, max_steps, 'r.-', label='Maximum Steps')
+        plt.grid(True)
+        plt.xlabel('K (Number of Patterns)')
+        plt.ylabel('Convergence Steps')
+        plt.title('Convergence Analysis')
+        plt.legend()
+        
+        # Plot 3: Overlap Distribution for selected K values
+        plt.subplot(223)
+        selected_K = [K_values[0], K_values[len(K_values)//2], K_values[-1]]
+        for K in selected_K:
+            overlaps = results[K]['overlaps']
+            plt.hist(overlaps, bins=50, alpha=0.5, label=f'K={K}', density=True)
+        plt.xlabel('Normalized Overlap')
+        plt.ylabel('Density')
+        plt.title('Overlap Distribution')
+        plt.legend()
+        
+        # Plot 4: K/N ratio vs αK
+        plt.subplot(224)
+        ratio_values = [K/self.N for K in K_values]
+        plt.plot(ratio_values, alpha_values, 'mo-')
+        plt.axhline(y=0.5, color='r', linestyle='--', label='α = 0.5')
+        plt.grid(True)
+        plt.xlabel('K/N Ratio')
+        plt.ylabel('αK')
+        plt.title('Storage Capacity Ratio Analysis with Partial Recovery')
+        plt.legend()
+        
+        plt.tight_layout()
+        plt.show()
+        
+        # Find and print K₁/₂
+        K_half = None
+        for K, res in results.items():
+            if res['alpha_K'] < 0.5:
+                K_half = K
+                break
+        
+        if K_half:
+            print("\nCapacity Analysis Summary:")
+            print(f"- K₁/₂ ≈ {K_half}")
+            print(f"- Storage capacity ratio: {K_half/self.N:.2f}N")
+            
+            # Analyze high-load regime
+            high_load_K = [K for K in K_values if K > 2*K_half]
+            if high_load_K:
+                print("\nHigh-load Regime Analysis (K > 2K₁/₂):")
+                for K in high_load_K:
+                    print(f"K = {K} (K/N = {K/self.N:.2f}):")
+                    print(f"- αK = {results[K]['alpha_K']:.4f}")
+                    print(f"- Average steps = {results[K]['avg_steps']:.2f}")
 
 def main():
-    # Model parameters
-    params = {
-        'n': 3,               # Power of DAM energy function (>2 for DAM)
-        'm': 3,               # Power of loss function
-        'eps0': 4.0e-2,      # Initial learning rate
-        'f': 0.998,          # Learning rate decay
-        'p': 0.6,            # Momentum
-        'Nep': 50,          # Number of epochs, 300 
-        'Temp_in': 540.,     # Initial temperature
-        'Temp_f': 540.,      # Final temperature
-        'thresh_pret': 200,  # Temperature ramp length
-        'Num': 100,          # Batch size
-        'mu': -0.3,          # Weight initialization mean
-        'sigma': 0.3,        # Weight initialization std
-        'prec': 1.0e-30     # Weight update precision
-    }
+    # Parameters
+    N = 100
+    epsilon = 0
+    recovery_threshold = 0.8  # Only require 80% of bits to match for recovery
+    K_range = list(range(50, 1501, 50))  # 50 to 1500 in steps of 50
+    n_samples = 1000
     
-    # Prepare data
-    M, Lab, MT, LabT = prepare_data(samples_per_class=1000, test_samples_per_class=100)
-    N = M.shape[0]
-    print(f"Pattern dimension (N): {N}")
+    # Create experiment instance
+    experiment = HopfieldCapacityAnalysis(N, epsilon, recovery_threshold)
     
-    # Test different K values
-    # K_values = np.arange(50, 1550, 50)
-    K_values=[50] # Test only one value for now (for faster execution) 
-    results = []
+    # Run analysis
+    results = experiment.analyze_capacity(K_range, n_samples)
     
-    for K in K_values:
-        # Train model
-        KS = train_DAM(K, M, Lab, params)
-        
-        # Evaluate model
-        train_mean_diff, train_std_diff = evaluate_recovery(KS, M, Lab, params)
-        test_mean_diff, test_std_diff = evaluate_recovery(KS, MT, LabT, params)
-        
-        results.append({
-            'K': K,
-            'train_mean_diff': train_mean_diff,
-            'train_std_diff': train_std_diff,
-            'test_mean_diff': test_mean_diff,
-            'test_std_diff': test_std_diff
-        })
-        
-        print(f"K={K}:")
-        print(f"  Train: mean diff = {train_mean_diff:.1f} ± {train_std_diff:.1f} bits")
-        print(f"  Test:  mean diff = {test_mean_diff:.1f} ± {test_std_diff:.1f} bits")
-    
-    # Plot results
-    plt.figure(figsize=(12, 5))
-    
-    # Plot 1: K vs Training Differences
-    plt.subplot(121)
-    plt.errorbar([r['K'] for r in results], 
-                [r['train_mean_diff'] for r in results],
-                yerr=[r['train_std_diff'] for r in results],
-                fmt='bo-', label='Train')
-    plt.xlabel('K (Memory size)')
-    plt.ylabel('Average Bit Differences')
-    plt.title(f'Training Set Bit Differences (n={params["n"]})')
-    plt.grid(True)
-    
-    # Plot 2: K vs Test Differences
-    plt.subplot(122)
-    plt.errorbar([r['K'] for r in results], 
-                [r['test_mean_diff'] for r in results],
-                yerr=[r['test_std_diff'] for r in results],
-                fmt='ro-', label='Test')
-    plt.xlabel('K (Memory size)')
-    plt.ylabel('Average Bit Differences')
-    plt.title('Test Set Bit Differences')
-    plt.grid(True)
-    
-    plt.tight_layout()
-    plt.show()
-    
-    # Save results
-    results_array = np.array([(r['K'], r['train_mean_diff'], r['train_std_diff'],
-                              r['test_mean_diff'], r['test_std_diff']) for r in results])
-    np.savetxt(f'dam_diff_results_n{params["n"]}.csv', results_array, 
-               header='K,train_mean,train_std,test_mean,test_std',
-               delimiter=',', 
-               fmt='%d,%.1f,%.1f,%.1f,%.1f')
+    # Plot and analyze results
+    experiment.plot_results(results)
 
 if __name__ == "__main__":
     main()
