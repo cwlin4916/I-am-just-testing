@@ -154,7 +154,7 @@
 	<img src="../photos/Anna/cat_dragon.png" alt="Cat Dragon" style="width: 20%; height: auto;">
 	<br> 
     <br> 
-    <p>Panda зараз читає... <a href="https://arxiv.org/abs/2312.09390">this!</a>  </p>
+    <p>Panda зараз читає... <a href="https://hal.science/hal-04486770v1/document">this!</a>  </p>
     <img src="../photos/Anna/pandaPDf.png" alt="Panda Reading" style="width: 10%; height: auto;"> 
     <br>
 	<div class="checkbox-container">
@@ -162,11 +162,11 @@
         <label for="ukrainian-time-checkbox">Is your computer set to Ukrainian time?</label>
     </div>
         <!-- Add this section where you want the video to appear -->
-    <p>Я завжди люблю свого дракона</p>
+    <!-- <p>Я завжди люблю свого дракона</p>
     <video width="400" height="340" controls>
         <source src="../photos/Anna/afternoon.mp4" type="video/mp4">
         Your browser does not support the video tag.
-    </video>
+    </video> -->
 
     <!-- Compute Button -->
     <button id="compute-button">
@@ -238,24 +238,7 @@
                         '20:00': 'Watching elections',
                         // Add more intervals as needed
                     },
-                    'Tuesday': {
-                        '9:00': 'Dancing bulabuu',
-                        '10:00': 'Dancing bulabuu',
-                        '10:30': 'Dancing bulabuu',
-                        '11:00': 'Dancing like a panda',
-                        '11:30': 'Bulabuuuu panda',
-                        '12:00': 'Having lunch with drakon',
-                        '12:30': 'Having lunch with drakon',
-                        '15:00': 'Studying in the library',
-                        '15:30': 'Studying in the library',
-                        '16:00': 'Meeting panda',
-                        '17:00': 'Seminar',
-                        '17:30': 'Class',
-                        '18:00': 'Dancing pando',
-                        '18:30': 'Running bulaboo Pando',
-                        '20:00': 'Watching elections',
-                        // Add more intervals as needed
-                    },
+                  
                     'Thursday': {
                         '10:00': 'Visiting the museum',
                         '10:30': 'Visiting the museum',
@@ -347,7 +330,7 @@
                     let location = locationTable[dayName][timeKey];
                     resultElement.textContent = '🐼 is currently: ' + location;
                 } else {
-                    resultElement.textContent = 'A little hard to compute, panda is moving very fast!';
+                    resultElement.textContent = 'Панда пропала без дракона!';
                 }
             }, 3000);
         });
@@ -400,5 +383,22 @@
 </html>
 
 
+<!-- 
 
-
+'Tuesday': {
+    '9:00': 'Dancing bulabuu',
+    '10:00': 'Dancing bulabuu',
+    '10:30': 'Dancing bulabuu',
+    '11:00': 'Dancing like a panda',
+    '11:30': 'Bulabuuuu panda',
+    '12:00': 'Having lunch with drakon',
+    '12:30': 'Having lunch with drakon',
+    '15:00': 'Studying in the library',
+    '15:30': 'Studying in the library',
+    '16:00': 'Meeting panda',
+    '17:00': 'Seminar',
+    '17:30': 'Class',
+    '18:00': 'Dancing pando',
+    '18:30': 'Running bulaboo Pando',
+    '20:00': 'Watching elections',
+}, -->
