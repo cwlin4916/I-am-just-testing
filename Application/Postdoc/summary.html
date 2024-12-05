@@ -89,13 +89,80 @@
         .additional-materials a:hover {
             text-decoration: underline;
         }
+
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        h1, h2 {
+            text-align: center;
+            color: #1e40af;
+        }
+        table {
+            width: 90%;
+            margin: 0 auto 50px;
+            border-collapse: collapse;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #e5e7eb;
+            font-size: 0.85em;
+        }
+        th {
+            background-color: #93c5fd;
+            color: #1e3a8a;
+        }
+        .statistics-section {
+            margin: 20px auto;
+            width: 90%;
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        .statistics-section h2 {
+            color: #1e40af;
+            font-size: 1.2em;
+            margin-bottom: 15px;
+        }
+        .statistics-section p {
+            font-size: 1em;
+            line-height: 1.6;
+            color: #4b5563;
+        }
+        .statistics-section table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .statistics-section th, .statistics-section td {
+            padding: 8px 10px;
+            border-bottom: 1px solid #e5e7eb;
+            text-align: left;
+        }
+
+        #statisticsSection ul {
+            font-size: 0.85em; /* Smaller font size */
+            color: #555; /* Optional: Make the text a bit lighter for readability */
+            margin-left: 20px; /* Optional: Add some left margin for better spacing */
+            line-height: 1.4; /* Optional: Adjust line height for better spacing */
+        }
+        
     </style>
 </head>
 <body>
     <h1>Application Tracker</h1>
-	<h2 class="section-title">Applications </h2>
-    <!-- All applciation would be No unless otherwise -->
-	<table>
+    <h2 class="section-title">Applications</h2>
+    
+
+	<table  id="applicationTable">
 		<tr>
 			<th>Fellowship Name</th>
 			<th>Deadline </th>
@@ -105,26 +172,26 @@
 		</tr>
     
         <tr>
-            <td> Career Development Research Fellowships 2025 <br> 
-            St John's College, Oxford
+            <td> Career Development, St John's College, Oxford
              </td>
              <td>
                 October 31st 
              </td>
              <td>
-                <!-- Red color for applied -->
                 <span style="color: green;">Yes</span>
              </td>
              <td>
                 <span style="color: red;">No</span>
              </td>
-             <td> Send an email to Harrington. </td>
+             <td>
+                <span style="color: red;">Rejected</span> 
+            </td>
         </tr>
         <tr> 
-            <td>
+        <td>
             Schmidt AI in Science Postdoctoral Fellowship
         </td>
-            <td>November 1st </td>
+        <td>November 1st </td>
         <td> <span style="color: green;">Yes</span> </td>
         <td>
             <span style="color: red;">No</span>
@@ -157,13 +224,16 @@
         </tr>
         <tr>
             <td>
-                [HCMPD, HCMPD24] Hausdorff Postdoc Positions
+                Hausdorff Postdoc Positions
             </td>
             <td> October 31st</td>
             <td>
                 <span style="color: green;">Yes</span>
             </td>
-            <td> written Gaitsgory as supervisor. </td>
+            <td>
+                <span style="color: green;">Yes</span>
+            </td>
+            <td>Supervisor= Gaitsgory </td>
         </tr>
         <tr>
             <td>Van Vleck, Wisconsin-Madison</td>
@@ -180,6 +250,9 @@
             <td>Stanford Science Fellow </td>
             <td> October 15th </td>
             <td> <span style="color: green;">Yes</span> </td>
+            <td>
+                <span style="color: red;">No</span>
+            </td>
         </tr>
         <tr>
             <td>Herman-Weyl Instructor Ship </td>
@@ -201,19 +274,19 @@
                 <span style="color: green;">Yes</span>
              </td>
              <td>
-                No 
+              <span style="color: red;">No</span>
              </td>
              <td>
-                <span style="color: red;">Rejected.</span>
+                <span style="color: red;">Rejected</span>
              </td>
         </tr>
         <tr>
-            <td>Mathematics, CRM-ISM Postdoctoral Fellowships 2025</td>
+            <td>CRM-ISM Postdoctoral Fellowships 2025</td>
             <td> November 10th </td>
             <td> <span style="color: green;">Yes</span> </td>
-            <td> No </td>
+            <td> <span style="color: green;">Yes</span> </td>
         </tr>
-        <tr>
+        <!-- <tr>
             <td> <a href="https://careers.epfl.ch/job/Lausanne-Postdoctoral-Position-in-Mathematics/940031974/">EPFL, RT </a>
              </td>
              <td>
@@ -223,19 +296,19 @@
                 <span style="color:green;">Yes </span>
              </td>
              <td> 
-
+<span style="color: red;">No</span>
              </td>
              <td> 
                 Need to ask reference writeres to 
                 <br> send an email to talya.saladino@epfl.ch 
              </td>
-        </tr>
+        </tr> -->
         <tr>
             <td>
-                <a href="">EPFL ARG</a>
+                <a href="">EPFL Arithmetic Geometry</a>
             </td>
             <td>
-                ASAP 
+                December 1st
             </td>
             <td>
                 <span style="color: green;">Yes</span> 
@@ -248,12 +321,12 @@
 
         <tr>
             <td> Harvard, Benjamin Peirce Fellow in Mathematics</td>
-            <td>November 15th</td>
+            <td>December 1st</td>
             <td> 
                 <span style="color: green;">Yes</span>
              </td>
              <td>
-                <span styl="color: red;">No</span>
+                <span style="color: green;">Yes</span>
              </td>
         </tr>
         <tr>
@@ -263,17 +336,17 @@
                 <span style="color: green;">Yes</span>
             </td>
             <td>
-                <span stlye="color: red;">No</span>
+                <span style="color: green;">Yes</span>
             </td>
         </tr>
 		<tr>
 			<td>Duke, Elliott and Griffiths Assistant Research Professors</td>
-			<td> December 1st, early application adivsed </td>
+			<td> December 1st  </td>
 			<td>
                 <span style="color: green;">Yes</span>
             </td>
             <td>
-                <span style="color: red;">No</span>
+                <span style="color: green;">Yes</span>
             </td>
 		</tr>
         <tr>
@@ -297,7 +370,7 @@
                 <span style="color: green;">Yes</span>
             </td>
             <td>
-                <span style="color: red;">No</span>
+                <span style="color: green;">Yes</span>
             </td>
         </tr>
         <tr><td><a href="https://computing.mit.edu/tayebati-postdoctoral-fellowship-program/">Tayebeti Fellowship Program</a></td>
@@ -327,7 +400,7 @@
                 <span style="color: green">Yes</span>
             </td>
             <td>
-                <span style="color: red;">No</span>
+                <span style="color: green;">Yes</span>
             </td>
 		</tr>
       
@@ -337,7 +410,10 @@
 			<td>
                 <span style="color: green;">Yes</span> 
              </td>
-             <span style="color: red;">No </span>
+             <td>
+                <span style="color: green;">Yes </span>
+             </td>
+             
 		</tr>
         <tr>
             <td>Milnor Lectuer, Stony</td>
@@ -345,7 +421,9 @@
             <td> 
                 <span style="color :green;">Yes</span>
             </td>
-            <td> </td>
+            <td> 
+                <span style="color :green;">Yes</span>
+            </td>
         </tr>
         <tr>
             <td> Simons Lecturer, Stony </td>
@@ -353,11 +431,17 @@
             <td> 
                 <span style="color :green;">yes</span>
             </td>
+            <td> 
+                <span style="color :green;">Yes</span>
+            </td>
         </tr>
         <tr>
             <td>SCGP, Stony</td>
             <td>
                 November 15th
+            </td>
+            <td> 
+                <span style="color :green;">Yes</span>
             </td>
             <td> 
                 <span style="color :green;">Yes</span>
@@ -370,7 +454,7 @@
                 <span style="color: green;">Yes</span>
             </td>
             <td>
-                <span style="color: red;">No</span>
+                <span style="color: green;">Yes</span>
             </td>
         </tr>
         
@@ -400,6 +484,21 @@
             </td>
         </tr>
         <tr>
+            <td>
+                Center of Human AI Internship
+            </td>
+            <td>November 14th</td>
+            <td>
+                <span style="color: green;">Yes</span>
+            </td>
+            <td>
+                NA
+            </td>
+            <td>
+                <span style="color: green;">Accepted</span>
+            </td>
+        </tr>
+        <tr>
             <td><a href="https://recruit.apo.ucla.edu/JPF09876">Hendrik Adjunct Professorship</a></td>
             <td>November 14th</td>
             <td>
@@ -420,7 +519,7 @@
                 <span style="color: green;">Yes</span>
             </td>
             <td>
-                <span style="color: red;">No</span>
+                <span style="color: green;">Yes</span>
             </td>
         </tr>
         <tr>
@@ -435,7 +534,7 @@
                 <span style="color: red;">No</span>
             </td>
         </tr>
-        <tr>
+        <!-- <tr>
             <td>
                 <a href="https://www.nitmb.org/biological-systems-workshop">NITMB Workshop </a> 
             </td>
@@ -445,7 +544,13 @@
             <td>
                 <span style="color: green;">Yes</span>
             </td>
-        </tr>
+            <td>
+                <span style="color: red;">No</span>
+            </td>
+            <td>
+                <span style="color: green;">Accepted</span>
+            </td>
+        </tr> -->
         <tr>
             <td>Princeton University</td>
             <td>November 15th</td>
@@ -453,16 +558,19 @@
                 <span style="color: green;">Yes</span>
             </td>
             <td>
-                <span style="color: red;">No</span>
+                <span style="color: green;">Yes</span>
             </td>
         </tr>
         
         <tr>
-            <td> Assistant Professor (RTPC) of Mathematics, USC </td>
+            <td> Assistant Professor RTPC, USC </td>
             <td> November 15th </td>
             
             <td>
                 <span style="color: green;">Yes</span>
+            </td>
+            <td>
+                <span style="color: red;">No</span>
             </td>
         </tr>
         <tr>
@@ -475,8 +583,19 @@
                 <span style="color: green;">Yes</span>
             </td>
             <td>
-                <span style="color: red;">Confirm David, Yiannis on 28th. 
-                </span>
+             
+            </td>
+        </tr>
+        <tr>
+            <td> IAS </td>
+            <td>
+November 15th 
+            </td>
+            <td> 
+                <span style="color: green;">Yes </span>
+            </td>
+            <td>
+                <span style="color: green;">Yes</span>
             </td>
         </tr>
         <tr>
@@ -511,6 +630,9 @@
             <td>
                 <span style="color: green;">Yes</span>
             </td>
+            <td>
+                <span style="color: red;">No</span>
+            </td>
         </tr>
         <tr>
             <td> Post-Docs of Excellence: Hadamard Lecturers	 </td>
@@ -520,33 +642,37 @@
             </td>
         </tr>
         <tr>
-            <td>Cornell, HCWang</td>
-            <td>December 1st</td>
-        </tr>
-
-        <tr>
-            <td>Joseph F. Ritt Assistant Professorships</td>
+            <td>Cornell, H.C. Wang</td>
             <td>December 1st</td>
             <td>
                 <span style="color: green;">Yes</span>
             </td>
             <td>
-                <span style="color: red;">No</span>
+                <span style="color: green;">Yes</span>
+            </td>
+        </tr>
+
+        <tr>
+            <td>Joseph F. Ritt Assistant Professorships, Columbia</td>
+            <td>December 1st</td>
+            <td>
+                <span style="color: green;">Yes</span>
+            </td>
+            <td>
+                <span style="color: green;">Yes</span>
             </td>
         </tr>
         <tr>
             <td><a href="https://www.ihes.fr/en/applications/post-docs/simons-foundation/">IHES post-doctoral offers</a></td>
             <td>December 2nd</td>
             <td>
-                <span style="color: red;">No, <br> 49%   complete 
-                    <br> 
+                <span style="color: green;">Yes 
                      </span>
             </td>
             <td>
-
-            </td>
+                <span style="color: red;">No</span>
             <td>
-                Need to remind David to send. 
+
             </td>
         </tr>
         <tr>
@@ -558,7 +684,7 @@
                 <span style="color: green;">Yes </span>
             </td>
             <td> 
-                <span style="color: green;">Yes </span>
+                <span style="color: red;">No </span>
             </td>
         </tr>
         
@@ -573,19 +699,32 @@
                 <span style="color: green;">Yes</span>
             </td>
             <td>
-                <span style="color: red;">No</span>
-            </td>
+                <span style="color: green;">Yes</span>
 		</tr>
         <tr>
-            <td><a href="https://www.mis.mpg.de/career/postdoc">Max Planck Institute Postdoc</a></td>
+            <td><a href="https://www.mis.mpg.de/career/postdoc">Max Planck Institute MiS</a></td>
             <td>December 1st</td>
+            <td>
+                <span style="color: green;">Yes</span>
+            </td>
+            <td>
+                <span style="color: red;">No</span>
+            </td>
+
+        </tr>
+        <tr>
+            <td>Berlin Mathematical School</td>
+            <td> December 1st </td>
+            <td>
+                <span style="color: green;">Yes</span>  
+            </td>
             <td>
                 <span style="color: red;">No</span>
             </td>
         </tr>
 		<tr>
 			<td>
-				<a href="#">Titchmarsh Research Fellow [2 letters] </a>
+				<a href="#">Titchmarsh Research Fellow </a>
 			</td>
 			<td>
 				November 22nd 
@@ -608,7 +747,7 @@
                 <span style="color: green">Yes</span>
             </td>
             <td>
-                <span style="color: red">No</span>
+                <span style="color: green">Yes</span>
             </td>
         </tr>
         <tr>
@@ -624,11 +763,7 @@
                 <span style="color: red"> No </span>
             </td>
             <td>
-                <span style="color: red"> Need to send email to Andreas Monod,
-                    <br> 
-                     Andrew Saxe, <br>
-                     Dario Beraldo 
-                    <br>  </span>
+                <span style="color: red"> ?? </span>
             </td>
         </tr>
         <tr>
@@ -646,23 +781,61 @@
             </td>
         </tr>
         <tr>
-            <td>Brown; Categorification and Computation in Algebraic Combinatorics, Postdoctoral Fellow</td>
+            <td>
+                Acting Assistant Professor, Washington University 
+            </td>
+            <td>
+                December 15th 
+            </td>
+            <td>
+                <span style="color: red;">No</span>
+            </td>
+            <td>
+                <span style="color: red;">No</span>
+            </td>
+        </tr>
+        <tr>
+            <td>Brown; Categorification, Postdoctoral Fellow</td>
+            <td>
+                December 31st 
+            </td>
+            <td>
+                <span style="color: red;">No</span>
+            </td>
+            <td>
+                <span style="color: red;">No</span>
+            </td>
         </tr>
         <tr>
             <td><a href="https://www.jobs.cam.ac.uk/job/48868/">Herchel Smith Research Fellow</a>" </td>
-            <td>ASAP</td>
+            <td>December 16th </td>
+            <td>
+                <span style="color: red;">No</span>
+            </td>
+            <td>
+                <span style="color: red;">No</span>
+            </td>
         </tr>
 		
         <tr>
             <td>Institute for Computational and Experimental Research in Mathematics</td>
             <td> January 1st </td>
-            <td> 
-                <span stlye="color: red;">No</span>
+            <td>
+                <span style="color: red;">No</span>
+            </td>
+            <td>
+                <span style="color: red;">No</span>
             </td>
         </tr>
         <tr>
             <td><a href="https://futureoflife.org/grant-program/postdoctoral-fellowships/">Future of life</a></td>
             <td> January 06 </td>
+            <td>
+                <span style="color: red;">No</span>
+            </td>
+            <td>
+                <span style="color: red;">No</span>
+            </td>
         </tr>
         <tr>
             <td> 
@@ -679,5 +852,70 @@
             </td>
         </tr>
     </table>
+
+    <!-- New Statistics Section -->
+    <div class="statistics-section" id="statisticsSection">
+        <h2>Statistics</h2>
+        <p>Total Applications: <span id="totalApplications"></span></p>
+        <p>Number of Rejections: <span id="numRejections"></span></p>
+        <p>Number of Successes: <span id="numSuccesses"></span></p>
+        <p>Success Rate: <span id="successRate"></span>%</p>
+        <p>Rejected Fellowships:<p>
+        <ul id="rejectedList"></ul>
+        <p>Accepted Fellowships:<p>
+        <ul id="acceptedList"></ul>
+    </div>
+
+    <script>
+        // JavaScript Code for Statistics
+        document.addEventListener("DOMContentLoaded", function() {
+            const table = document.getElementById("applicationTable");
+            const rows = table.getElementsByTagName("tr");
+            
+            let totalApplications = 0;
+            let numRejections = 0;
+            let numSuccesses = 0;
+            let rejectedFellowships = [];
+            let acceptedFellowships = [];
+            
+            // Loop through rows, skipping the header row
+            for (let i = 1; i < rows.length; i++) {
+                totalApplications++;
+                const notesCell = rows[i].cells[4]; // Notes column
+                
+                if (notesCell && notesCell.innerText.includes("Rejected")) {
+                    numRejections++;
+                    rejectedFellowships.push(rows[i].cells[0].innerText); // Add fellowship name
+                } else if (notesCell && notesCell.innerText.includes("Accepted")) {
+                    numSuccesses++;
+                    acceptedFellowships.push(rows[i].cells[0].innerText); // Add fellowship name
+                }
+            }
+            
+            // Calculate success rate
+            const successRate = ((numSuccesses / (numRejections + numSuccesses)) * 100).toFixed(2);
+            
+            // Update statistics section
+            document.getElementById("totalApplications").innerText = totalApplications;
+            document.getElementById("numRejections").innerText = numRejections;
+            document.getElementById("numSuccesses").innerText = numSuccesses;
+            document.getElementById("successRate").innerText = isNaN(successRate) ? "0.00" : successRate;
+            
+            // Update lists
+            const rejectedList = document.getElementById("rejectedList");
+            rejectedFellowships.forEach(fellowship => {
+                const li = document.createElement("li");
+                li.innerText = fellowship;
+                rejectedList.appendChild(li);
+            });
+
+            const acceptedList = document.getElementById("acceptedList");
+            acceptedFellowships.forEach(fellowship => {
+                const li = document.createElement("li");
+                li.innerText = fellowship;
+                acceptedList.appendChild(li);
+            });
+        });
+    </script>
 </body>
 </html>
