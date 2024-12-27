@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Application List</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        h1, h2 {
+            text-align: center;
+            color: #1e40af;
+        }
+        table {
+            width: 90%;
+            margin: 0 auto 50px;
+            border-collapse: collapse;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #e5e7eb;
+            font-size: 0.85em;
+        }
+        th {
+            background-color: #93c5fd;
+            color: #1e3a8a;
+        }
+        a {
+            color: #1e40af;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .section-title {
+            color: #3b82f6;
+            margin-top: 30px;
+            font-size: 1.2em;
+        }
+        .description {
+            text-align: center;
+            max-width: 80%;
+            margin: 0 auto 20px;
+            font-size: 0.7em;
+            color: #4b5563;
+        }
+        .marked-row {
+            background-color: #e0f2fe;
+        }
+        .mark-button, .undo-button {
+            padding: 6px 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: 0.85em;
+        }
+        .mark-button {
+            background-color: #3b82f6;
+            color: white;
+        }
+        .undo-button {
+            background-color: #f87171;
+            color: white;
+            display: none;
+        }
+        .mark-button:disabled {
+            background-color: #a5b4fc;
+            cursor: not-allowed;
+        }
+        .additional-materials {
+            max-width: 90%;
+            margin: 20px auto;
+            font-size: 0.85em;
+            color: #333;
+        }
+        .additional-materials a {
+            color: #1e40af;
+            text-decoration: none;
+        }
+        .additional-materials a:hover {
+            text-decoration: underline;
+        }
+        .code-button {
+            display: inline-block;
+            padding: 2px 5px;
+            margin-top: 5px;
+            background-color: #e5e7eb;
+            color: #333;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 0.75em;
+            border: 1px solid #ccc;
+            cursor: pointer;
+        }
+        .code-button:hover {
+            background-color: #d1d5db;
+        }
+        .code-button.disabled {
+            background-color: #f5f5f5;
+            color: #999;
+            cursor: not-allowed;
+            border: 1px solid #ddd;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Weekend Projects in Machine Learning</h1>
+    <p>
+        Below is a list of weekend projects I have done during my free time. 
+        <br> Topics range from multilingual NLP, computational social science, and memory networks.  
+    </p>
+    <!-- Current projects -->
+    <p><strong>Current Projects:</strong></p>
+    <div class="additional-materials">
+        <ul>
+            <li>
+                <a href="https://cwlin4916.github.io/Trees/NLP/small_project_writeups/Geometry_of_Parameter_Spaces.pdf">
+                    Geometry of parameter spaces, On-going.
+                </a>
+                Joint with Chris Hillar (Redwood Research). 
+                <br> We study the relation between polytopal decomposition, scaling, and optimization in the parameter space of neural networks. 
+                <br> Our work is inspired by recent works which apply tropical geometry.
+                <br>
+                <a href="/code/geometry_of_parameter_spaces.zip" class="code-button">[code]</a>
+            </li>
+            <li>
+                <a href="https://cwlin4916.github.io/Trees/NLP/small_project_writeups/Beyond_Memory_Storage_Capacity.pdf">
+                    Scaling and generalization of associative memory networks, On-going.
+                </a> 
+                Joint with Muhan Gao (Johns Hopkins University).
+                <br> This project empirically studies dense associative memory networks as developed by Krotov and Hopfield in language modeling tasks.
+                <br> We focus on scenarios where stored memories exceed theoretical capacity limits.
+                <br>
+                <a href="#" class="code-button disabled">[code]</a>
+            </li>
+        </ul> 
+    </div>
+
+    <!-- Past Projects -->
+    <p>Past projects:</p>
+    <div class="additional-materials">
+        <ul>
+            <li>
+                <a href="https://cwlin4916.github.io/Trees/NLP/small_project_writeups/SLU_multilingual_project.pdf">
+                    Multilingual synthetic dataset generation.
+                </a> 
+                Joint with Chutong Meng (George Mason University). 
+                <br> This project studies synthetic data in spoken language understanding (SLU).
+                <br>
+                <a href="/code/SLU_multilingual_dataset.zip" class="code-button">[code]</a>
+            </li>
+            <li>
+                <a href="https://cwlin4916.github.io/Trees/NLP/small_project_writeups/anthroscore.pdf">
+                    AnthroScore: A Multilingual NLP Tool for Social Science; April 2024.
+                </a>
+                <br> This small note plays around with anthropomorphism, the attribution of human traits to non-human entities, using recent methodologies.
+                <br>
+                <a href="#" class="code-button disabled">[code]</a>
+            </li>
+            <li>
+                <a href="https://cwlin4916.github.io/Trees/NLP/small_project_writeups/debate_bias_mitigation.pdf">
+                    Adversarial debates for multiple language models.
+                </a>
+                Joint with Cole Molloy (Johns Hopkins University) and Lois Wang (Johns Hopkins University).
+                <br> We structured in-context adversarial debates between language models to mitigate biases in pretrained models.
+                <br>
+                <a href="#" class="code-button disabled">[code]</a>
+            </li>
+            <li>
+                <a href="https://cwlin4916.github.io/Trees/NLP/small_project_writeups/Isoscores.pdf">
+                    Embedding space analysis of multilingual models, May 2024.
+                </a>
+                <br> Analyzes the spatial organization of point clouds induced from word embeddings.
+                <br> It discusses interpretations of isotropy across different languages and models.
+                <br>
+                <a href="#" class="code-button disabled">[code]</a>
+            </li>
+            <li>
+                <a href="https://github.com/LAISR-Cornell/emotion-tune">Emotion fine tuning, October 2024.</a>
+                An experimental project with Prof. Levine (Cornell University) and Luhan A. Mikaelson (Apart Research).
+                <br> We explored the role of emotional feedback compared to reinforcement learning from human feedback (RLHF) in improving model performance.
+                <br>
+                <a href="#" class="code-button disabled">[code]</a>
+            </li>
+            <li>
+                <a href="https://cwlin4916.github.io/Trees/NLP/small_project_writeups/causal_inference_regression.pdf">
+                    Python experimentation on causal inference, March 2024.
+                </a>
+                <br>
+                <a href="#" class="code-button disabled">[code]</a>
+            </li>
+            <li>
+                <a href="https://cwlin4916.github.io/Trees/subpages/Mathematics_notes/AI_math_research_survey_v0.1.pdf">
+                    Survey of AI Mathematics Research, April 2023 (Outdated.)
+                </a>
+                Joint with Sina Hazratpour (Johns Hopkins University).
+                <br> This article surveys the impact of large language models in the theorem-proving community.
+                <br>
+                <a href="#" class="code-button disabled">[code]</a>
+            </li>
+        </ul>
+    </div>
+    <p>
+        Quick links:
+    </p>
+    <div class="additional-materials">
+        <ul>
+            <li>
+                <a href="https://cwlin4916.github.io/Trees/Application/Postdoc/Publication.pdf">Publications</a> (Submitted preprints) in mathematics.
+            </li>
+            <li>
+                <a href="https://cwlin4916.github.io/Trees/Application/Postdoc/Research.pdf">Research statement</a> in mathematics.
+            </li>
+            <li>
+                <a href="https://cwlin4916.github.io/Trees/Application/Postdoc/CVA.pdf">Curriculum Vitae</a>
+            </li>
+        </ul>
+    </div>
+
+    <script>
+        document.querySelectorAll('.code-button').forEach(button => {
+            const href = button.getAttribute('href');
+            if (!href || href === '#') {
+                button.classList.add('disabled');
+                button.innerText = '[code]';
+            }
+        });
+    </script>
+</body>
+</html>
