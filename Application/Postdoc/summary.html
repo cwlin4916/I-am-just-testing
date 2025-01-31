@@ -259,6 +259,9 @@
             <td>
                 <span style="color: red;">No</span>
             </td>
+            <td>
+                <span style="color: red;">Rejected</span>
+            </td>
         </tr>
         <tr>
             <td>Herman-Weyl Instructor Ship </td>
@@ -320,6 +323,9 @@
             </td>
             <td>
                 <span style="color: green;">Yes</span>
+            </td>
+            <td>
+                <span style="color: red;">Rejected</span>
             </td>
         </tr>
 
@@ -389,6 +395,9 @@
                     Wei Zhang 
                 </span>
             </td>
+            <td>
+                <span style="color: red;">Rejected</span>
+            </td>
         </tr>
         <!-- <tr><td><a href="https://computing.mit.edu/tayebati-postdoctoral-fellowship-program/">Tayebeti Fellowship Program</a></td>
             <td>December 31st  </td>
@@ -437,6 +446,9 @@
                 <br> 
             Daniel Bump 
             </span>
+             </td>
+             <td>
+                <span style="color: red;">Rejected</span>
              </td>
              
 		</tr>
@@ -570,6 +582,9 @@
 
                 </span>
             </td>
+            <td>
+
+            </td>
         </tr>
         <tr>
             <td>Bing, Texas at Austin</td>
@@ -617,6 +632,9 @@ David Ben-Zvi
                     Akshay Venkatesh 
 
                 </span>
+            </td>
+            <td>
+                <span style="color: red;">Rejected</span>
             </td>
         </tr>
         
@@ -807,6 +825,9 @@ November 15th
             <td>
                 <span style="color: red;">No</span>
             </td>
+            <td>
+                <span style="color: red;">Rejected</span>
+            </td>
         </tr>
 		<tr>
 			<td>
@@ -974,14 +995,14 @@ November 15th
                 <span style="color: red;">yes</span>
             </td>
         </tr>
-        <tr>
+        <!-- <tr>
             <td> 
                 PIBBSS, Summer Fellowship. 
             </td>
             <td>
                 January 21st. 
             </td>
-        </tr>
+        </tr> -->
     </table>
 
     <!-- New Statistics Section -->
@@ -990,6 +1011,7 @@ November 15th
         <p>Total Applications: <span id="totalApplications"></span></p>
         <p>Number of Rejections: <span id="numRejections"></span></p>
         <p>Number of Successes: <span id="numSuccesses"></span></p>
+        <p>Remaining Hopes: <span id="Hope"></span> </p>
         <p>Success Rate: <span id="successRate"></span>%</p>
         <p>Rejected Fellowships:<p>
         <ul id="rejectedList"></ul>
@@ -1006,6 +1028,7 @@ November 15th
             let totalApplications = 0;
             let numRejections = 0;
             let numSuccesses = 0;
+            let Hope = 0;
             let rejectedFellowships = [];
             let acceptedFellowships = [];
             
@@ -1022,16 +1045,18 @@ November 15th
                     acceptedFellowships.push(rows[i].cells[0].innerText); // Add fellowship name
                 }
             }
-            
             // Calculate success rate
             const successRate = ((numSuccesses / (numRejections + numSuccesses)) * 100).toFixed(2);
             
+            Hope = totalApplications - numRejections - numSuccesses;
             // Update statistics section
             document.getElementById("totalApplications").innerText = totalApplications;
             document.getElementById("numRejections").innerText = numRejections;
             document.getElementById("numSuccesses").innerText = numSuccesses;
+            document.getElementById("Hope").innerText = Hope;
             document.getElementById("successRate").innerText = isNaN(successRate) ? "0.00" : successRate;
             
+            // Calcuate remaining hope
             // Update lists
             const rejectedList = document.getElementById("rejectedList");
             rejectedFellowships.forEach(fellowship => {
