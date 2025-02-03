@@ -1,0 +1,38 @@
+import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib.animation as animation
+from mpmath import zeta
+
+def evaluate_zeta(re, im):
+    s = complex(re, im)
+    return zeta(s)
+
+re_min, re_max, re_steps = -2, 2, 400
+im_min, im_max, im_steps = -2, 2, 400
+
+re_values = np.linspace(re_min, re_max, re_steps)
+im_values = np.linspace(im_min, im_max, im_steps)
+
+zeta_values = np.empty((re_steps, im_steps))
+
+fig, ax = plt.subplots()
+cax = ax.imshow(zeta_values.T, extent=[re_min, re_max, im_min, im_max], origin='lower', cmap='viridis')
+fig.colorbar(cax)
+ax.set_xlabel('Re(s)')
+ax.set_ylabel('Im(s)')
+ax.set_title('Magnitude of Riemann Zeta Function')
+
+def animate(frame):
+    phase_shift = frame / 20.0
+    for i, re in enumerate(re_values):
+        for j, im in enumerate(im_values):
+            zeta_val = evaluate_zeta(re, im + phase_shift)
+            zeta_values[i, j] = abs(zeta_val)
+    cax.set_array(zeta_values.T)
+    return [cax]
+
+ani = animation.FuncAnimation(fig, animate, frames=100, interval=100, blit=True)
+
+plt.show()
+# To save the animation as a file:
+# ani.save('zeta_function_animation.mp4', writer='ffmpeg')
